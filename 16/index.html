@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jan Truppe — Hochzeitsfotograf</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind = { config: { theme: { extend: {
+      colors: {
+        bg: '#0b1020',
+        card: '#0f1724',
+        accentFrom: '#ff7aa2',
+        accentTo: '#ffd2a6',
+        soft: '#f3f4f6'
+      },
+      fontFamily: {
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui']
+      }
+    } } } }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    html,body { height: 100%; }
+    body {
+      font-family: Poppins, ui-sans-serif, system-ui;
+      background: linear-gradient(180deg, rgba(11,16,32,1) 0%, rgba(7,10,20,1) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior: smooth;
+    }
+
+    /* Subtle floating animation for photos */
+    @keyframes floaty {
+      0% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-6px) rotate(0deg); }
+      100% { transform: translateY(0) rotate(-1deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .floaty { animation: floaty 6s ease-in-out infinite; }
+    .fade-up { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .floaty, .fade-up { animation: none; }
+    }
+
+    /* Glass panel accent */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* Decorative gradient line */
+    .grad-line {
+      background: linear-gradient(90deg, rgba(255,122,162,0.95), rgba(255,210,166,0.95));
+      height: 4px;
+      border-radius: 999px;
+    }
+
+    /* Focus styles */
+    .focus-ring:focus {
+      outline: 2px solid rgba(255,122,162,0.18);
+      outline-offset: 3px;
+    }
+
+    /* Small gallery image overlay */
+    .img-overlay { background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%); }
+  </style>
+</head>
+<body class="text-soft">
+  <header class="sticky top-0 z-40">
+    <div class="glass border-b border-white/3">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="#home" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accentFrom to-accentTo flex items-center justify-center shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span class="text-white font-semibold tracking-tight">Jan Truppe</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-8 text-sm">
+            <a href="#portfolio" class="text-white/75 hover:text-white transition">Portfolio</a>
+            <a href="#services" class="text-white/75 hover:text-white transition">Leistungen</a>
+            <a href="#kontakt" class="text-white/75 hover:text-white transition">Kontakt</a>
+            <a href="#kontakt" class="inline-flex items-center gap-2 bg-gradient-to-r from-accentFrom to-accentTo text-slate-900 px-4 py-2 rounded-full text-sm font-medium shadow hover:opacity-95 transition">
+              Portfolio ansehen
+            </a>
+          </nav>
+
+          <div class="md:hidden">
+            <button id="mobileToggle" class="p-2 rounded-md focus-ring text-white/80" aria-label="Menü öffnen">
+              <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-white/3">
+        <div class="px-4 pt-4 pb-6 space-y-3">
+          <a href="#portfolio" class="block text-white/85 py-2">Portfolio</a>
+          <a href="#services" class="block text-white/85 py-2">Leistungen</a>
+          <a href="#kontakt" class="block text-white/85 py-2">Kontakt</a>
+          <a href="#kontakt" class="block mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accentFrom to-accentTo text-slate-900 px-4 py-2 rounded-full text-sm font-medium shadow">Portfolio ansehen</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="pt-10 pb-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Hero -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-6">
+          <div class="max-w-2xl">
+            <div class="grad-line w-24 mb-6 rounded-full"></div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight fade-up" style="animation-delay: 0.05s">
+              Jan Truppe
+              <span class="block text-2xl font-medium text-white/70 mt-2">Hochzeitsfotograf — echte Momente, zeitlose Bilder</span>
+            </h1>
+
+            <p class="mt-6 text-white/70 text-lg leading-relaxed fade-up" style="animation-delay: 0.12s">
+              Ich begleite eure Hochzeit mit einer ruhigen, dokumentarischen Handschrift und liebevollen Portraits — von den intensiven Augenblicken bis zu den feinen Details. Authentisch. Elegant. Natürlich.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#portfolio" class="inline-flex items-center gap-3 bg-gradient-to-r from-accentFrom to-accentTo text-slate-900 px-5 py-3 rounded-full text-sm font-semibold shadow-lg transform hover:scale-[1.02] transition focus-ring">
+                Portfolio ansehen
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -mr-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+              </a>
+
+              <a href="#kontakt" class="inline-flex items-center gap-2 px-4 py-3 rounded-full border border-white/6 text-white/90 text-sm font-medium hover:bg-white/3 transition focus-ring">
+                Anfrage senden
+              </a>
+            </div>
+
+            <ul class="mt-8 grid grid-cols-2 gap-3 text-sm text-white/60">
+              <li class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/3 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A2 2 0 0122 9.618v4.764a2 2 0 01-2.447 1.894L15 14M4 6v12a2 2 0 002 2h9" />
+                  </svg>
+                </span>
+                Verfügbar für Deutschland & Europa
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/3 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                Schnelle Lieferung: Auswahlgalerien in 2–3 Wochen
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 mt-6 lg:mt-0">
+          <div class="relative grid grid-cols-2 gap-4">
+            <div class="overflow-hidden rounded-2xl shadow-xl floaty" style="animation-delay: 0.18s">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=16a5f99fcbcbd86b6f1a2c3b11b3b3f2" alt="Brautpaar Kuss im Freien" class="w-full h-56 object-cover object-center transition-transform duration-500 hover:scale-105">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-xl translate-y-8 floaty" style="animation-delay: 0.28s">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8bdc2d6b4c7d4ce1b2b7f042f6b6d8f2" alt="Detailaufnahme Ringe" class="w-full h-56 object-cover object-center transition-transform duration-500 hover:scale-105">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-xl -translate-y-4 floaty" style="animation-delay: 0.38s">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3c2b4f1f6bb0a1b2e3f4c5d6e7f8a9b0" alt="Tanz erstes Paar" class="w-full h-56 object-cover object-center transition-transform duration-500 hover:scale-105">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-xl translate-y-4 floaty" style="animation-delay: 0.48s">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=b5a8f2f2a3b2a1c9d8e7f6b5a4c3b2a1" alt="Portrait Braut" class="w-full h-56 object-cover object-center transition-transform duration-500 hover:scale-105">
+            </div>
+          </div>
+
+          <div class="mt-6 text-white/60 text-sm">
+            <p>Jedes Bild entsteht mit Feingefühl — natürliche Farben, weiche Lichtführung und diskrete Begleitung.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio preview -->
+      <section id="portfolio" class="mt-14">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Ausgewählte Arbeiten</h2>
+          <a href="#kontakt" class="text-white/70 hover:underline hidden sm:inline">Mehr ansehen →</a>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div class="rounded-xl overflow-hidden shadow-lg relative group">
+            <img src="https://images.unsplash.com/photo-1524503033411-c9566986fc8f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=56b3d8cea9b0a5c8b6d7e1a9b3c0f1e2" alt="Brautjungfern" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition">Kirchliche Trauung</div>
+          </div>
+          <div class="rounded-xl overflow-hidden shadow-lg relative group">
+            <img src="https://images.unsplash.com/photo-1519340333755-459f2f0d0e1a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b1d1a6f5a1b2c3d4e5f6a7b8c9d0e1f" alt="Brautpaar Portrait" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition">Portraits</div>
+          </div>
+          <div class="rounded-xl overflow-hidden shadow-lg relative group">
+            <img src="https://images.unsplash.com/photo-1533681704621-9e7c6b9a5f5a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2a1b3c4d5e6f7a8b9c0d1e2f3a4b5c6d" alt="Hochzeit Empfang" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 img-overlay opacity-0 group-hover:opacity-100 transition"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition">Empfang & Details</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="mt-14">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="col-span-1 glass p-6 rounded-2xl shadow-lg">
+            <h3 class="text-lg font-semibold text-white">Basispaket</h3>
+            <p class="mt-2 text-white/70 text-sm">Begleitung 4 Stunden · 200 bearbeitete Bilder · digitale Galerie</p>
+            <ul class="mt-4 space-y-2 text-white/70 text-sm">
+              <li>Vorgespräch & Timeline</li>
+              <li>Hochzeitsreportage</li>
+              <li>USB & Online-Download</li>
+            </ul>
+            <div class="mt-6">
+              <span class="text-white font-bold text-xl">ab 1.200€</span>
+            </div>
+          </div>
+
+          <div class="col-span-1 glass p-6 rounded-2xl shadow-lg border-2 border-white/4 transform scale-100">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white">Premium</h3>
+              <div class="text-xs text-white/70 px-2 py-1 bg-white/3 rounded-full">Beliebt</div>
+            </div>
+            <p class="mt-2 text-white/70 text-sm">Ganztägige Begleitung · 400+ bearbeitete Bilder · Fine-Art Album</p>
+            <ul class="mt-4 space-y-2 text-white/70 text-sm">
+              <li>Vorgespräch & Probeshooting</li>
+              <li>Second Shooter möglich</li>
+              <li>Express-Galerie</li>
+            </ul>
+            <div class="mt-6">
+              <span class="text-white font-bold text-xl">ab 2.900€</span>
+            </div>
+          </div>
+
+          <div class="col-span-1 glass p-6 rounded-2xl shadow-lg">
+            <h3 class="text-lg font-semibold text-white">Elopement & Engagement</h3>
+            <p class="mt-2 text-white/70 text-sm">Intimes Shooting · 2 Stunden · persönliche Retusche</p>
+            <ul class="mt-4 space-y-2 text-white/70 text-sm">
+              <li>On-location Planung</li>
+              <li>Reiseoptionen verfügbar</li>
+              <li>Album-Option</li>
+            </ul>
+            <div class="mt-6">
+              <span class="text-white font-bold text-xl">ab 650€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 text-sm text-white/70">
+          <p>Alle Pakete sind individuell anpassbar. Gerne erstelle ich euch ein maßgeschneidertes Angebot — kontaktiert mich unverbindlich.</p>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="mt-14">
+        <div class="bg-gradient-to-tr from-white/2 to-white/1 glass p-6 rounded-2xl shadow-inner">
+          <div class="md:flex md:items-center md:justify-between">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Kundenstimmen</h3>
+              <p class="text-white/70 mt-2">Echte Erfahrungen von Paaren, die ich begleitet habe.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex gap-3">
+              <div class="text-sm text-white/60">⭐ 4.9 • 120+ Bewertungen</div>
+              <a href="#kontakt" class="inline-flex items-center gap-2 bg-gradient-to-r from-accentFrom to-accentTo text-slate-900 px-4 py-2 rounded-full text-sm font-medium shadow">Anfrage</a>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <blockquote class="p-4 rounded-xl bg-white/3 text-white/80">
+              "Jan hat unsere Hochzeit so entspannt begleitet — die Bilder sind einfach zeitlos. Danke!"<cite class="block text-sm text-white/60 mt-3">— Laura & Simon</cite>
+            </blockquote>
+            <blockquote class="p-4 rounded-xl bg-white/3 text-white/80">
+              "Feine Details, starke Momente. Wir sind begeistert von der natürlichen Handschrift." <cite class="block text-sm text-white/60 mt-3">— Anna & David</cite>
+            </blockquote>
+            <blockquote class="p-4 rounded-xl bg-white/3 text-white/80">
+              "Schnelle Kommunikation & tolle Fotos — absolute Empfehlung." <cite class="block text-sm text-white/60 mt-3">— Maria & Jens</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kontakt -->
+      <section id="kontakt" class="mt-14">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="glass p-6 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-semibold text-white">Anfrage & Kontakt</h3>
+            <p class="mt-2 text-white/70">Schreibt mir eure Daten — ich melde mich schnellstmöglich mit Verfügbarkeiten und Details zurück.</p>
+
+            <form id="contactForm" class="mt-6 space-y-4" onsubmit="handleForm(event)">
+              <div>
+                <label class="text-sm text-white/70">Name</label>
+                <input required name="name" type="text" class="mt-2 w-full bg-transparent border border-white/6 rounded-lg px-3 py-2 text-white focus-ring" placeholder="Euer Name">
+              </div>
+
+              <div>
+                <label class="text-sm text-white/70">E-Mail</label>
+                <input required name="email" type="email" class="mt-2 w-full bg-transparent border border-white/6 rounded-lg px-3 py-2 text-white focus-ring" placeholder="name@beispiel.de">
+              </div>
+
+              <div>
+                <label class="text-sm text-white/70">Datum der Hochzeit</label>
+                <input name="date" type="date" class="mt-2 w-full bg-transparent border border-white/6 rounded-lg px-3 py-2 text-white focus-ring">
+              </div>
+
+              <div>
+                <label class="text-sm text-white/70">Nachricht</label>
+                <textarea name="message" rows="4" class="mt-2 w-full bg-transparent border border-white/6 rounded-lg px-3 py-2 text-white focus-ring" placeholder="Erzähl mir kurz von euren Plänen..."></textarea>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <button type="submit" class="inline-flex items-center gap-2 bg-gradient-to-r from-accentFrom to-accentTo text-slate-900 px-5 py-3 rounded-full text-sm font-semibold shadow hover:opacity-95 transition focus-ring">Anfrage senden</button>
+                <button type="button" onclick="location.href='mailto:jan@truppe-fotografie.de'" class="text-white/70 text-sm hover:underline">Direkt mailen</button>
+              </div>
+
+              <p id="formNotice" class="text-sm text-white/60 hidden">Danke! Deine Anfrage wurde vorbereitet.</p>
+            </form>
+          </div>
+
+          <div class="glass p-6 rounded-2xl shadow-lg">
+            <h4 class="text-lg font-semibold text-white">Weitere Kontaktmöglichkeiten</h4>
+            <ul class="mt-4 space-y-3 text-white/70">
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2 8.5A6.5 6.5 0 0114.5 8.5V21h-12V8.5z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.5 8.5a6.5 6.5 0 116.5 6.5H14.5V8.5z" />
+                </svg>
+                Jan Truppe Fotografie<br><span class="text-white/50 text-sm">Umsatzsteuer-ID auf Anfrage</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m0 4v9m6-9v9M6 20h12" />
+                </svg>
+                Telefon: <a href="tel:+4915112345678" class="text-white/80 hover:underline ml-1">+49 151 12345678</a>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 3.13a8 8 0 010 17.75M8 3.13a8 8 0 000 17.75M12 7v5l3 3" />
+                </svg>
+                E-Mail: <a href="mailto:jan@truppe-fotografie.de" class="text-white/80 hover:underline ml-1">jan@truppe-fotografie.de</a>
+              </li>
+            </ul>
+
+            <div class="mt-6">
+              <h5 class="text-sm text-white/70">Social</h5>
+              <div class="mt-3 flex items-center gap-3">
+                <a href="#" class="w-9 h-9 rounded-full bg-white/3 flex items-center justify-center text-white/80 hover:bg-white/4 transition" aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.5A4.5 4.5 0 1016.5 13 4.5 4.5 0 0012 8.5zm5.5-2.75a1.25 1.25 0 11-1.25 1.25A1.25 1.25 0 0117.5 5.75z" /></svg>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white/3 flex items-center justify-center text-white/80 hover:bg-white/4 transition" aria-label="Facebook">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h3v3h-3v2h3v10h-3v6h-3v-6H8v-3h2V8a3 3 0 013-3h2V3z"/></svg>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white/3 flex items-center justify-center text-white/80 hover:bg-white/4 transition" aria-label="Pinterest">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.5 9.5 0 00-4.4 18.07c-.06-.81-.11-2.06.02-2.95.12-.82.78-5.22.78-5.22s-.2-.41-.2-1.02c0-.96.56-1.67 1.27-1.67.6 0 .89.45.89.99 0 .6-.38 1.5-.58 2.33-.17.7.36 1.27 1.07 1.27 1.28 0 2.27-1.34 2.27-3.28 0-1.71-1.23-2.9-2.99-2.9-2.04 0-3.24 1.53-3.24 3.11 0 .62.24 1.28.54 1.64.06.07.07.13.05.2-.06.22-.17.7-.19.8-.03.14-.11.17-.25.1-.93-.43-1.51-1.79-1.51-2.88 0-2.34 1.7-4.49 4.9-4.49 2.57 0 4.57 1.84 4.57 4.3 0 2.57-1.62 4.63-3.87 4.63-.76 0-1.47-.39-1.71-.85l-.47 1.78c-.17.65-.62 1.46-.92 1.96A9.5 9.5 0 1012 2z"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-6 text-sm text-white/60">
+              <p>Reisebereit für Destination Weddings. Individuelle Fotosets und Alben auf Anfrage.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-14 border-t border-white/4 pt-8 pb-12 text-white/60">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="text-sm">&copy; <span id="year"></span> Jan Truppe Fotografie — Alle Rechte vorbehalten</div>
+          <div class="flex items-center gap-4">
+            <a href="#impressum" class="text-white/60 hover:underline text-sm">Impressum</a>
+            <a href="#datenschutz" class="text-white/60 hover:underline text-sm">Datenschutz</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const ham = document.getElementById('hamburger');
+      if (!mobileMenu.classList.contains('hidden')) {
+        ham.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>';
+      } else {
+        ham.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>';
+      }
+    });
+
+    // Form behavior (client-side demo)
+    function handleForm(e) {
+      e.preventDefault();
+      const notice = document.getElementById('formNotice');
+      notice.classList.remove('hidden');
+      notice.textContent = 'Danke! Ich melde mich in Kürze per E-Mail.';
+      // Optionally here you could send data via fetch to an API.
+      e.target.reset();
+      setTimeout(() => notice.classList.add('hidden'), 6000);
+    }
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple fade-up reveal when in viewport
+    const faders = document.querySelectorAll('.fade-up');
+    const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+  </script>
+</body>
+</html>
