@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jens Dagne – Friseur in Worms</title>
+  <meta name="description" content="Jens Dagne – Moderner Friseursalon in Worms. Haarschnitte, Coloration, Styling & Barber-Services. Termin online vereinbaren." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg-1: #0f1724;
+      --bg-2: #0b1220;
+      --muted: #9aa4b2;
+      --accent-from: #7c3aed;
+      --accent-to: #06b6d4;
+      --card: rgba(255,255,255,0.03);
+    }
+    html,body,#root{height:100%}
+    body{
+      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 6%),
+                  radial-gradient(600px 300px at 90% 90%, rgba(6,182,212,0.06), transparent 6%),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Smooth reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: reveal 0.9s cubic-bezier(.2,.9,.3,1) forwards;
+    }
+    .reveal.delay-1{ animation-delay: 0.12s; }
+    .reveal.delay-2{ animation-delay: 0.24s; }
+    .reveal.delay-3{ animation-delay: 0.36s; }
+    .reveal.delay-4{ animation-delay: 0.48s; }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: none; }
+    }
+
+    .glow {
+      position: relative;
+    }
+    .glow::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.04));
+      z-index: -1;
+      filter: blur(18px);
+      opacity: 0.9;
+    }
+
+    /* Subtle floating for hero illustration */
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Glass card backdrop */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Custom scrollbar for larger screens */
+    @media (min-width: 768px){
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 999px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+    }
+
+    /* Responsive headline sizing tweaks */
+    .hero-title { line-height: 1.02; }
+  </style>
+</head>
+<body>
+  <div id="root" class="min-h-screen flex flex-col">
+
+    <!-- NAV -->
+    <header class="w-full py-4 px-4 md:px-8 lg:px-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-600 to-cyan-400 shadow-lg">
+          <!-- Scissors SVG -->
+          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+            <path d="M13.5 12.5L21 6"></path>
+            <path d="M6 18l7.5-6.5"></path>
+            <circle cx="6" cy="8" r="3"></circle>
+            <circle cx="6" cy="16" r="3"></circle>
+          </svg>
+        </div>
+        <div class="text-sm leading-tight">
+          <div class="font-semibold">Jens Dagne</div>
+          <div class="text-[11px] text-[rgba(230,238,246,0.6)]">Friseur • Worms</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm text-[rgba(230,238,246,0.8)]">
+        <a href="#services" class="hover:text-white transition">Leistungen</a>
+        <a href="#team" class="hover:text-white transition">Team</a>
+        <a href="#kontakt" class="hover:text-white transition">Kontakt</a>
+        <a href="#preise" class="hover:text-white transition">Preise</a>
+      </nav>
+
+      <div class="ml-auto md:ml-0 flex items-center gap-3">
+        <a href="#kontakt" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 shadow-lg text-sm font-semibold text-white transform hover:scale-[1.02] transition">Termin vereinbaren</a>
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg glass">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="px-4 md:px-8 lg:px-16 flex-1">
+      <section class="mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="reveal delay-1">
+          <p class="text-sm text-[rgba(230,238,246,0.6)] uppercase tracking-wider mb-3">Tradition trifft modernes Handwerk</p>
+          <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+            Jens Dagne — Ihr Friseur in Worms<br class="hidden sm:inline">Für maskuline Cuts & feminine Eleganz
+          </h1>
+          <p class="mt-4 text-[15px] text-[rgba(230,238,246,0.72)] max-w-xl">
+            Zeitlose Looks, präzise Schnitte und individuelle Colorationen. Wir hören zu, planen mit Ihnen und kreieren Frisuren, die passen — persönlich und professionell.
+          </p>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a href="#kontakt" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 text-sm font-semibold shadow-lg hover:scale-[1.02] transition">
+              Termin vereinbaren
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <a href="#services" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-[rgba(255,255,255,0.06)] text-sm text-[rgba(230,238,246,0.9)] hover:backdrop-brightness-110 glass">
+              Unsere Leistungen
+            </a>
+          </div>
+
+          <div class="mt-8 grid grid-cols-2 gap-3 max-w-md">
+            <div class="glass p-3 rounded-xl flex items-center gap-3">
+              <div class="w-10 h-10 rounded-md flex items-center justify-center bg-[rgba(255,255,255,0.04)]">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+              </div>
+              <div class="text-sm">
+                <div class="font-semibold">Erfahrenes Team</div>
+                <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Kompetent & freundlich</div>
+              </div>
+            </div>
+
+            <div class="glass p-3 rounded-xl flex items-center gap-3">
+              <div class="w-10 h-10 rounded-md flex items-center justify-center bg-[rgba(255,255,255,0.04)]">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20v-6"></path>
+                  <path d="M8 12v-2a4 4 0 0 1 8 0v2"></path>
+                </svg>
+              </div>
+              <div class="text-sm">
+                <div class="font-semibold">Individuelle Beratung</div>
+                <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Für Ihren persönlichen Look</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Illustration -->
+        <div class="reveal delay-2 flex items-center justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="glass rounded-3xl p-6 shadow-xl border border-[rgba(255,255,255,0.04)]">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-[rgba(230,238,246,0.6)]">Beliebteste Dienstleistung</div>
+                  <div class="mt-2 font-semibold text-lg">Precision Cut</div>
+                </div>
+                <div class="text-sm text-[rgba(230,238,246,0.65)]">ab 29€</div>
+              </div>
+
+              <div class="mt-4">
+                <div class="w-full h-48 rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 to-cyan-400 relative float">
+                  <!-- Minimal hairstyle illustration (SVG) -->
+                  <svg viewBox="0 0 600 400" class="w-full h-full opacity-95" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0.06"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="600" height="400" fill="url(#g1)"/>
+                    <g transform="translate(40,40)" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M40 240C40 180 120 120 220 120s180 60 180 120-80 120-180 120S40 300 40 240z" opacity="0.12" fill="rgba(0,0,0,0.06)"/>
+                      <path d="M140 110c30-12 70-10 100 2" stroke-opacity="0.9"/>
+                      <path d="M120 150c20-18 90-36 150 0" stroke-opacity="0.9"/>
+                      <path d="M95 215c40-40 120-60 185-16" stroke-opacity="0.95"/>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-[13px]">
+                <div class="text-[rgba(230,238,246,0.7)]">Modern, präzise & nachhaltig</div>
+                <div class="text-[rgba(230,238,246,0.85)] font-semibold">Jetzt Termin</div>
+              </div>
+            </div>
+
+            <!-- small badges -->
+            <div class="absolute -bottom-4 left-4 flex gap-3">
+              <div class="glass px-3 py-2 rounded-xl flex items-center gap-2 text-[12px]">
+                <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4 12h4"></path><path d="M16 12h4"></path>
+                </svg>
+                <span>Barber & Color</span>
+              </div>
+              <div class="glass px-3 py-2 rounded-xl flex items-center gap-2 text-[12px]">
+                <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <path d="M7 10l5 5 5-5"></path>
+                </svg>
+                <span>Online-Buchung</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services" class="mt-14 reveal delay-3">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold">Unsere Leistungen</h2>
+              <p class="mt-1 text-[rgba(230,238,246,0.6)] text-sm max-w-xl">Komplettes Angebot von klassischen Haarschnitten bis zu Colorationen, Styling und Bartpflege — individuell abgestimmt.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <article class="glass p-5 rounded-2xl hover:scale-[1.02] transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-600 to-cyan-400 text-white">
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <path d="M7 10l5 5 5-5"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Haarschnitt</h3>
+                  <p class="mt-1 text-[13px] text-[rgba(230,238,246,0.6)]">Präzise Schnitte für Damen, Herren und Kinder — modern oder klassisch.</p>
+                  <div class="mt-3 text-sm text-[rgba(230,238,246,0.7)]">ab 29€</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="glass p-5 rounded-2xl hover:scale-[1.02] transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-[rgba(255,255,255,0.03)] text-white border border-[rgba(255,255,255,0.04)]">
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3v12"></path>
+                    <path d="M6 3c4 0 5 3 9 3s5-3 9-3"></path>
+                    <path d="M21 15v6"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Coloration</h3>
+                  <p class="mt-1 text-[13px] text-[rgba(230,238,246,0.6)]">Balayage, Strähnen, Ganzfärbung — schonende Techniken und individuelles Farbkonzept.</p>
+                  <div class="mt-3 text-sm text-[rgba(230,238,246,0.7)]">ab 45€</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="glass p-5 rounded-2xl hover:scale-[1.02] transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-[rgba(255,255,255,0.03)] text-white border border-[rgba(255,255,255,0.04)]">
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20v-6"></path>
+                    <path d="M8 12v-2a4 4 0 1 1 8 0v2"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Styling & Events</h3>
+                  <p class="mt-1 text-[13px] text-[rgba(230,238,246,0.6)]">Festliche Frisuren, Brautstyling oder Tages-Styling — perfekt für jeden Anlass.</p>
+                  <div class="mt-3 text-sm text-[rgba(230,238,246,0.7)]">ab 35€</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="glass p-5 rounded-2xl hover:scale-[1.02] transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-600 to-cyan-400 text-white">
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4 12h4"></path><path d="M16 12h4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Barber & Bartpflege</h3>
+                  <p class="mt-1 text-[13px] text-[rgba(230,238,246,0.6)]">Klassische Rasuren, Bart-Shaping und Pflege für gepflegtes Auftreten.</p>
+                  <div class="mt-3 text-sm text-[rgba(230,238,246,0.7)]">ab 18€</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM / ABOUT SMALL -->
+      <section id="team" class="mt-14 reveal delay-4">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div class="md:col-span-2 glass p-6 rounded-2xl">
+            <h3 class="font-semibold text-lg">Über uns</h3>
+            <p class="mt-3 text-[rgba(230,238,246,0.7)] text-sm">
+              Seit vielen Jahren steht der Salon Jens Dagne in Worms für präzises Handwerk, freundlichen Service und hochwertige Produkte. Unser Team arbeitet mit modernen Techniken und legt großen Wert auf persönliche Beratung – damit Sie mit einem guten Gefühl und perfekter Frisur nach Hause gehen.
+            </p>
+
+            <div class="mt-4 flex gap-3 flex-wrap">
+              <div class="px-3 py-2 rounded-xl bg-[rgba(255,255,255,0.02)] text-sm">Handwerkskunst</div>
+              <div class="px-3 py-2 rounded-xl bg-[rgba(255,255,255,0.02)] text-sm">Nachhaltige Produkte</div>
+              <div class="px-3 py-2 rounded-xl bg-[rgba(255,255,255,0.02)] text-sm">Persönliche Beratung</div>
+            </div>
+          </div>
+
+          <div class="glass p-6 rounded-2xl flex flex-col items-center text-center">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f7f15d41f4e7f1e1d51b7ebc6b4f3d3" alt="Friseur Salon" class="w-36 h-36 rounded-2xl object-cover border border-[rgba(255,255,255,0.04)]">
+            <div class="mt-4">
+              <div class="font-semibold">Jens Dagne</div>
+              <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Inhaber & Creative Director</div>
+            </div>
+            <div class="mt-4 text-[13px] text-[rgba(230,238,246,0.7)]">Terminvereinbarung direkt im Salon oder online. Wir freuen uns auf Sie!</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICES (compact) -->
+      <section id="preise" class="mt-14">
+        <div class="max-w-6xl mx-auto">
+          <h3 class="font-semibold text-lg">Preise (Auszug)</h3>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="glass p-4 rounded-xl">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-medium">Damen Haarschnitt</div>
+                <div class="text-sm text-[rgba(230,238,246,0.8)]">ab 39€</div>
+              </div>
+            </div>
+            <div class="glass p-4 rounded-xl">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-medium">Herren Haarschnitt</div>
+                <div class="text-sm text-[rgba(230,238,246,0.8)]">ab 29€</div>
+              </div>
+            </div>
+            <div class="glass p-4 rounded-xl">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-medium">Coloration</div>
+                <div class="text-sm text-[rgba(230,238,246,0.8)]">ab 45€</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="kontakt" class="mt-14 mb-10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="glass p-6 rounded-2xl">
+            <h3 class="font-semibold text-lg">Kontakt & Öffnungszeiten</h3>
+            <p class="mt-2 text-[rgba(230,238,246,0.7)] text-sm">Besuchen Sie uns zentral in Worms oder rufen Sie an. Termine sind auch online möglich.</p>
+
+            <div class="mt-4">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"></path>
+                  <path d="M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                </svg>
+                <div>
+                  <div class="text-sm">Adresse</div>
+                  <div class="text-[rgba(230,238,246,0.8)] font-medium">[Adresse einfügen], Worms</div>
+                </div>
+              </div>
+
+              <div class="mt-3 flex items-center gap-3">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92V21a1 1 0 0 1-1.11 1 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2 3.11 1 1 0 0 1 3 2h4.09a1 1 0 0 1 1 .75c.12.72.36 1.41.71 2.06a1 1 0 0 1-.24 1l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a1 1 0 0 1 1-.24c.65.35 1.34.59 2.06.71a1 1 0 0 1 .75 1V21z"></path>
+                </svg>
+                <div>
+                  <div class="text-sm">Telefon</div>
+                  <div class="text-[rgba(230,238,246,0.85)] font-medium">+49 123 456 789</div>
+                </div>
+              </div>
+
+              <div class="mt-3 flex items-center gap-3">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16v12H4z"></path>
+                  <path d="M22 6l-10 7L2 6"></path>
+                </svg>
+                <div>
+                  <div class="text-sm">E-Mail</div>
+                  <div class="text-[rgba(230,238,246,0.85)] font-medium"><a href="mailto:info@jensdagne.de" class="hover:underline">info@jensdagne.de</a></div>
+                </div>
+              </div>
+
+              <div class="mt-6 grid grid-cols-2 gap-2">
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Mo</div>
+                  <div class="font-medium">09:00 – 18:00</div>
+                </div>
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Di</div>
+                  <div class="font-medium">09:00 – 18:00</div>
+                </div>
+
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Mi</div>
+                  <div class="font-medium">09:00 – 18:00</div>
+                </div>
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Do–Fr</div>
+                  <div class="font-medium">09:00 – 19:00</div>
+                </div>
+
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">Sa</div>
+                  <div class="font-medium">08:00 – 13:00</div>
+                </div>
+                <div class="p-3 rounded-lg bg-[rgba(255,255,255,0.02)]">
+                  <div class="text-[12px] text-[rgba(230,238,246,0.6)]">So</div>
+                  <div class="font-medium">geschlossen</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="glass p-6 rounded-2xl">
+            <h3 class="font-semibold text-lg">Nachricht / Anfrage</h3>
+            <p class="mt-2 text-[rgba(230,238,246,0.7)] text-sm">Senden Sie uns eine Nachricht — wir melden uns zeitnah.</p>
+
+            <form action="mailto:info@jensdagne.de" method="post" enctype="text/plain" class="mt-4 grid grid-cols-1 gap-3">
+              <input class="px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] text-sm placeholder:text-[rgba(230,238,246,0.45)]" type="text" name="Name" placeholder="Ihr Name" required>
+              <input class="px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] text-sm placeholder:text-[rgba(230,238,246,0.45)]" type="email" name="E-Mail" placeholder="Ihre E-Mail" required>
+              <input class="px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] text-sm placeholder:text-[rgba(230,238,246,0.45)]" type="tel" name="Telefon" placeholder="Telefon (optional)">
+              <textarea class="px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] text-sm placeholder:text-[rgba(230,238,246,0.45)] h-28 resize-none" name="Nachricht" placeholder="Wunschdatum / Frage / Nachricht"></textarea>
+              <div class="flex items-center gap-3">
+                <button type="submit" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 text-sm font-semibold shadow-lg">Nachricht senden</button>
+                <a href="tel:+49123456789" class="text-sm text-[rgba(230,238,246,0.85)]">Alternativ anrufen: +49 123 456 789</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-[rgba(255,255,255,0.04)] py-6 px-4 md:px-8 lg:px-16 mt-auto">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-[rgba(230,238,246,0.7)]">
+          © <span id="year"></span> Jens Dagne — Friseur • Worms
+        </div>
+        <div class="flex items-center gap-4 text-[rgba(230,238,246,0.7)] text-sm">
+          <a href="#" class="hover:text-white transition">Impressum</a>
+          <a href="#" class="hover:text-white transition">Datenschutz</a>
+          <div class="h-6 border-l border-[rgba(255,255,255,0.04)]"></div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2h-3l-3 4v-4H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10"></path>
+            </svg>
+            <span class="text-[13px]">Zentral in Worms</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu placeholder (no real menu, but shows interaction)
+    const menuBtn = document.getElementById('menuBtn');
+    menuBtn?.addEventListener('click', () => {
+      alert('Menü öffnen (mobile) — Navigation hier erweitern.');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+
+    // Accessibility: reduce motion respect
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches) {
+      document.querySelectorAll('.reveal, .float').forEach(el => {
+        el.style.animation = 'none';
+      });
+    }
+  </script>
+</body>
+</html>
