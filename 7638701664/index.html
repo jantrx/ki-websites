@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Friseur Jens Dagne – Moderner Salon in Worms. Haarschnitt, Coloration, Balayage, Styling & Pflege. Persönliche Beratung, hochwertige Produkte." />
+  <title>Friseur Jens Dagne – Worms</title>
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23000'/%3E%3Ctext x='50' y='56' font-size='45' fill='white' font-family='Arial, Helvetica, sans-serif' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E">
+  <style>
+    :root{
+      --bg:#fbfbfc;
+      --card:#ffffff;
+      --muted:#7b7f87;
+      --accent:#0a84ff;
+      --accent-2:#00c7b7;
+      --glass: rgba(255,255,255,0.7);
+      --radius:14px;
+      --max-width:1100px;
+      --shadow: 0 6px 22px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.6);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        linear-gradient(180deg, rgba(10,132,255,0.03), rgba(0,199,183,0.01)),
+        var(--bg);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px 20px;}
+    header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      box-shadow: 0 1px 0 rgba(15,23,42,0.04);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      max-width:var(--max-width);margin:0 auto;padding:14px 20px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:48px;height:48px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;color:#fff;font-weight:700;
+      box-shadow: 0 6px 18px rgba(10,132,255,0.12);
+      flex-shrink:0;font-size:18px;
+    }
+    .brand h1{font-size:16px;margin:0;letter-spacing:-0.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px;border-radius:10px;font-weight:600;font-size:14px}
+    nav a:hover{background:rgba(10,132,255,0.06);color:var(--accent)}
+    .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(10,132,255,0.12)}
+    .cta:hover{opacity:0.95;transform:translateY(-1px)}
+    .hamburger{display:none;background:none;border:0;padding:8px;border-radius:10px}
+    /* Hero */
+    .hero{
+      margin-top:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.55));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:0;
+      align-items:stretch;
+    }
+    .hero-left{padding:44px 48px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(10,132,255,0.06);color:var(--accent);font-weight:700;font-size:13px}
+    .title{font-size:34px;margin:18px 0 8px;font-weight:800;letter-spacing:-0.6px}
+    .lead{color:var(--muted);margin:0 0 22px;max-width:60%}
+    .meta{display:flex;gap:18px;margin-top:18px;flex-wrap:wrap}
+    .meta .item{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,0.04);min-width:160px}
+    .meta .item h4{margin:0 0 6px;font-size:13px;color:var(--muted);font-weight:700}
+    .meta .item p{margin:0;font-weight:700;font-size:15px}
+    .hero-right{
+      background-image:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1556228453-20a2e5430d81?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=12a7c83c17a1c6f3b79b75f249c2a9e1');
+      background-size:cover;
+      background-position:center;
+      padding:26px;
+      display:flex;flex-direction:column;justify-content:flex-end;gap:18px;
+    }
+    .book-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+      border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(10,132,255,0.06);
+    }
+    .book-left{flex:1}
+    .book-left p{margin:0;font-weight:700}
+    .book-left small{display:block;color:var(--muted);font-size:13px}
+    .book-action{display:flex;gap:8px}
+    .btn-outline{border:1px solid rgba(15,23,42,0.06);background:#fff;padding:10px 12px;border-radius:10px;font-weight:700}
+    .btn-primary{background:var(--accent);color:#fff;padding:10px 12px;border-radius:10px;border:0;font-weight:800}
+    /* Sections */
+    main{max-width:var(--max-width);margin:28px auto;padding:0 20px 80px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+    h2{margin:0 0 12px;font-size:20px}
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .service{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(250,250,251,1), rgba(255,255,255,0.9));display:flex;justify-content:space-between;align-items:center}
+    .service .left{display:flex;gap:12px;align-items:center}
+    .icon{
+      width:46px;height:46px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(10,132,255,0.08), rgba(0,199,183,0.06));
+      color:var(--accent);font-weight:800;font-size:18px;
+    }
+    .price{font-weight:800}
+    .team{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .member{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:12px}
+    .avatar{width:86px;height:86px;border-radius:18px;background:#f6f7fb;display:grid;place-items:center;font-weight:800;color:var(--muted);font-size:20px}
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:120px;gap:12px}
+    .gallery img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+    .map{height:260px;border-radius:12px;overflow:hidden}
+    /* footer */
+    footer{margin-top:36px;padding:40px 20px;background:linear-gradient(180deg, rgba(250,250,251,1), rgba(245,247,250,1));border-radius:12px;box-shadow:var(--shadow)}
+    .footer-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+    .contact{min-width:220px}
+    .socials{display:flex;gap:10px}
+    .socials a{display:inline-flex;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;background:#fff;box-shadow:0 6px 18px rgba(10,132,255,0.04);text-decoration:none;color:var(--muted)}
+    .legal{color:var(--muted);font-size:13px;margin-top:12px}
+    /* responsive */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr 360px}
+      .lead{max-width:80%}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .team{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:720px){
+      .nav ul{display:none}
+      .hamburger{display:inline-block}
+      .hero{grid-template-columns:1fr}
+      .hero-right{order:-1;padding:18px;height:260px}
+      .hero-left{padding:26px}
+      .grid{grid-template-columns:1fr}
+      .team{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:100px}
+      .brand h1{font-size:15px}
+    }
+    /* small interactions */
+    a.button-link{text-decoration:none}
+    .hidden{display:none}
+    /* Modal gallery */
+    .modal{
+      position:fixed;inset:0;display:grid;place-items:center;background:rgba(2,6,23,0.6);z-index:80;padding:20px;
+    }
+    .modal .inner{max-width:96vw;max-height:92vh;border-radius:12px;overflow:hidden;background:#000}
+    .modal img{display:block;width:100%;height:100%;object-fit:contain}
+    .close-btn{position:absolute;right:18px;top:18px;background:rgba(255,255,255,0.9);border-radius:10px;padding:8px;border:0}
+    /* form */
+    form .row{display:flex;gap:12px}
+    form input,form textarea,form select{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;font-size:14px
+    }
+    form button{padding:12px;border-radius:10px;background:var(--accent);color:#fff;border:0;font-weight:800}
+    small.helper{display:block;color:var(--muted);margin-top:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav" role="navigation" aria-label="Hauptnavigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">JD</div>
+        <div>
+          <h1>Friseur Jens Dagne</h1>
+          <p>Salon • Worms</p>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#leistungen">Leistungen</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <a class="cta" href="#buchung">Termin buchen</a>
+        <button class="hamburger" aria-label="Menü" id="menuToggle">
+          <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="2" rx="1" fill="#0f1724"/><rect y="6" width="22" height="2" rx="1" fill="#0f1724"/><rect y="12" width="22" height="2" rx="1" fill="#0f1724"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" aria-label="Intro">
+      <div class="hero-left">
+        <div class="eyebrow">Handwerk & Stil</div>
+        <h2 class="title">Friseur Jens Dagne — Moderner Salon in Worms</h2>
+        <p class="lead">Persönliche Beratung, nachhaltige Produkte und präzises Handwerk. Ob klassischer Haarschnitt, moderne Coloration oder Balayage — bei uns sind Sie in besten Händen.</p>
+
+        <div class="meta">
+          <div class="item" aria-hidden="false">
+            <h4>Adresse</h4>
+            <p>Hauptstraße 12, 67547 Worms</p>
+          </div>
+          <div class="item">
+            <h4>Telefon</h4>
+            <p><a href="tel:+496241123456" style="color:inherit;text-decoration:none">+49 6241 123456</a></p>
+          </div>
+          <div class="item">
+            <h4>Öffnungszeiten</h4>
+            <p>Mo–Fr 09:00–18:00 · Sa 08:30–13:00</p>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+          <a class="cta" href="#buchung">Jetzt Termin buchen</a>
+          <a class="btn-outline" href="#leistungen">Unsere Leistungen</a>
+        </div>
+      </div>
+
+      <div class="hero-right" role="img" aria-label="Friseursalon Bild">
+        <div class="book-card" role="region" aria-label="Schnelle Buchung">
+          <div class="book-left">
+            <p>Günstige Erstberatung</p>
+            <small>10 Minuten kostenfrei bei erster Buchung</small>
+          </div>
+          <div class="book-action">
+            <a class="btn-outline" href="#kontakt">Rufen Sie an</a>
+            <a class="btn-primary" href="#buchung">Online buchen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:28px" id="leistungen" aria-labelledby="servicesTitle">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <h2 id="servicesTitle">Leistungen</h2>
+          <p style="color:var(--muted);margin:0">Professionelle Schnitte, Colorationen & Pflegebehandlungen</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px">
+          <div class="card">
+            <div class="services">
+              <div class="service">
+                <div class="left">
+                  <div class="icon">✂️</div>
+                  <div>
+                    <div style="font-weight:700">Damen Haarschnitt</div>
+                    <small style="color:var(--muted)">inkl. Waschen & Föhnen</small>
+                  </div>
+                </div>
+                <div class="price">ab 38 €</div>
+              </div>
+
+              <div class="service">
+                <div class="left">
+                  <div class="icon">🧑‍🦱</div>
+                  <div>
+                    <div style="font-weight:700">Herren Haarschnitt</div>
+                    <small style="color:var(--muted)">mit Styling</small>
+                  </div>
+                </div>
+                <div class="price">ab 24 €</div>
+              </div>
+
+              <div class="service">
+                <div class="left">
+                  <div class="icon">🎨</div>
+                  <div>
+                    <div style="font-weight:700">Coloration</div>
+                    <small style="color:var(--muted)">klassisch & modern</small>
+                  </div>
+                </div>
+                <div class="price">ab 45 €</div>
+              </div>
+
+              <div class="service">
+                <div class="left">
+                  <div class="icon">✨</div>
+                  <div>
+                    <div style="font-weight:700">Balayage / Strähnen</div>
+                    <small style="color:var(--muted)">individuell abgestimmt</small>
+                  </div>
+                </div>
+                <div class="price">ab 85 €</div>
+              </div>
+
+              <div class="service">
+                <div class="left">
+                  <div class="icon">💆‍♀️</div>
+                  <div>
+                    <div style="font-weight:700">Pflegebehandlung</div>
+                    <small style="color:var(--muted)">Intensivkur</small>
+                  </div>
+                </div>
+                <div class="price">ab 18 €</div>
+              </div>
+
+              <div class="service">
+                <div class="left">
+                  <div class="icon">👶</div>
+                  <div>
+                    <div style="font-weight:700">Kinder</div>
+                    <small style="color:var(--muted)">bis 12 Jahre</small>
+                  </div>
+                </div>
+                <div class="price">ab 14 €</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card" aria-label="Kurzinfos">
+            <h3 style="margin-top:0">Warum wir?</h3>
+            <p style="color:var(--muted)">Bei Friseur Jens Dagne verbinden wir präzises Handwerk mit zeitlosem Design. Wir nutzen hochwertige, nachhaltige Produkte und legen Wert auf Beratung, damit das Ergebnis perfekt zu Ihnen passt.</p>
+
+            <ul style="margin:14px 0 0;padding-left:18px;color:var(--muted)">
+              <li>Persönliche Stilberatung</li>
+              <li>Hochwertige Pflegeprodukte</li>
+              <li>Faire Preise & transparente Leistungen</li>
+              <li>Barrierefreier Salon</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:28px" id="team" aria-labelledby="teamTitle">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2 id="teamTitle">Unser Team</h2>
+          <p style="color:var(--muted);margin:0">Erfahren, kreativ, freundlich</p>
+        </div>
+
+        <div style="margin-top:18px" class="team">
+          <div class="card member">
+            <div class="avatar">JD</div>
+            <div style="font-weight:800">Jens Dagne</div>
+            <div style="color:var(--muted);font-size:14px">Inhaber & Master Stylist</div>
+            <div style="margin-top:6px;color:var(--muted);font-size:14px">20+ Jahre Erfahrung, spezialisiert auf Schnitt & Coloration.</div>
+          </div>
+
+          <div class="card member">
+            <div class="avatar">LM</div>
+            <div style="font-weight:800">Lena Müller</div>
+            <div style="color:var(--muted);font-size:14px">Color & Styling</div>
+            <div style="margin-top:6px;color:var(--muted);font-size:14px">Expertin für Balayage & moderne Techniken.</div>
+          </div>
+
+          <div class="card member">
+            <div class="avatar">TK</div>
+            <div style="font-weight:800">Tobias Klein</div>
+            <div style="color:var(--muted);font-size:14px">Cuts & Barbers</div>
+            <div style="margin-top:6px;color:var(--muted);font-size:14px">Präzision für Herrenhaarschnitte & Bartpflege.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:28px" id="galerie" aria-labelledby="galleryTitle">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2 id="galleryTitle">Galerie</h2>
+          <p style="color:var(--muted);margin:0">Inspirationen & Kundenbilder</p>
+        </div>
+
+        <div style="margin-top:14px" class="gallery" id="galleryGrid">
+          <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e30?q=80&w=800&auto=format&fit=crop" alt="Haarschnitt Beispiel 1" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop" alt="Coloration Beispiel" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1522335789209-6a5a8f3e5f0c?q=80&w=800&auto=format&fit=crop" alt="Balayage Beispiel" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Salon Atmosphäre" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1556228453-20a2e5430d81?q=80&w=800&auto=format&fit=crop" alt="Styling Beispiel" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1541534401786-4066bedd3e73?q=80&w=800&auto=format&fit=crop" alt="Pflegebehandlung" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1531835556321-4fda1c1d6b4b?q=80&w=800&auto=format&fit=crop" alt="Kundenfoto" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=800&auto=format&fit=crop" alt="Salon Interior" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:28px" id="kontakt" aria-labelledby="contactTitle">
+      <div class="container" style="display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start">
+        <div class="card">
+          <h2 id="contactTitle">Kontakt & Anfahrt</h2>
+          <p style="color:var(--muted);margin-top:6px">Wir freuen uns auf Ihren Besuch. Rufen Sie uns an oder schreiben Sie uns eine Nachricht.</p>
+
+          <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
+            <div style="min-width:180px">
+              <strong>Adresse</strong>
+              <div style="color:var(--muted)">Hauptstraße 12<br>67547 Worms</div>
+            </div>
+
+            <div style="min-width:160px">
+              <strong>Telefon</strong>
+              <div><a href="tel:+496241123456" style="color:var(--accent);text-decoration:none;font-weight:700">+49 6241 123456</a></div>
+            </div>
+
+            <div style="min-width:160px">
+              <strong>E-Mail</strong>
+              <div><a href="mailto:info@jensdagne.de" style="color:var(--accent);text-decoration:none;font-weight:700">info@jensdagne.de</a></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <form id="contactForm" novalidate>
+              <div class="row" style="margin-bottom:10px">
+                <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+                <input type="tel" id="phone" name="phone" placeholder="Telefon" required>
+              </div>
+
+              <div style="margin-bottom:10px">
+                <input type="email" id="email" name="email" placeholder="E-Mail" required>
+              </div>
+
+              <div style="margin-bottom:10px">
+                <select id="service" name="service" aria-label="Leistung">
+                  <option value="">Gewünschte Leistung (optional)</option>
+                  <option>Haarschnitt Damen</option>
+                  <option>Haarschnitt Herren</option>
+                  <option>Coloration</option>
+                  <option>Balayage / Strähnen</option>
+                  <option>Pflegebehandlung</option>
+                </select>
+              </div>
+
+              <div style="margin-bottom:10px">
+                <textarea id="message" name="message" rows="4" placeholder="Ihre Nachricht / Terminwunsch"></textarea>
+              </div>
+
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="submit">Nachricht senden</button>
+                <small style="color:var(--muted)">Wir antworten in der Regel innerhalb von 24 Stunden.</small>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card map" aria-hidden="false">
+            <iframe
+              src="https://www.google.com/maps?q=Hauptstraße+12+67547+Worms&output=embed"
+              width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="Anfahrt - Friseur Jens Dagne"></iframe>
+          </div>
+
+          <div style="margin-top:12px" class="card">
+            <h3 style="margin-top:0">Terminbuchung</h3>
+            <p style="color:var(--muted)">Nutzen Sie unsere Online-Buchung für eine schnelle Terminbestätigung.</p>
+            <a id="buchung" class="cta" href="#buchung" style="display:inline-block;margin-top:8px">Jetzt buchen</a>
+            <small class="helper">Alternativ rufen Sie uns an: <a href="tel:+496241123456" style="color:var(--accent);text-decoration:none">+49 6241 123456</a></small>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="logo" style="width:56px;height:56px;border-radius:14px">JD</div>
+        <div>
+          <strong>Friseur Jens Dagne</strong>
+          <div style="color:var(--muted)">Hauptstraße 12 · 67547 Worms</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-weight:800">Öffnungszeiten</div>
+        <div style="color:var(--muted)">Mo–Fr 09:00–18:00 · Sa 08:30–13:00</div>
+      </div>
+
+      <div class="contact">
+        <div style="font-weight:800">Kontakt</div>
+        <div style="color:var(--muted)"><a href="tel:+496241123456" style="color:inherit;text-decoration:none">+49 6241 123456</a> · <a href="mailto:info@jensdagne.de" style="color:inherit;text-decoration:none">info@jensdagne.de</a></div>
+
+        <div style="margin-top:10px" class="socials" aria-label="Soziale Medien">
+          <a href="#" title="Instagram" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z" stroke="#0f1724" stroke-opacity="0.65" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3.2" stroke="#0f1724" stroke-opacity="0.65" stroke-width="1.2"/></svg>
+          </a>
+          <a href="#" title="Facebook" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a4 4 0 0 0-4 4v3H8v3h3v7h3v-7h2.5l.5-3H14V6a1 1 0 0 1 1-1h3z" stroke="#0f1724" stroke-opacity="0.65" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="legal">© <span id="year"></span> Friseur Jens Dagne — Alle Rechte vorbehalten</div>
+      <div style="color:var(--muted);font-size:13px">Impressum · Datenschutz</div>
+    </div>
+  </footer>
+
+  <!-- Modal (gallery) -->
+  <template id="modalTpl">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close-btn" aria-label="Schließen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#0f1724" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="inner"><img src="" alt=""></div>
+    </div>
+  </template>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle (simple)
+    const menuToggle = document.getElementById('menuToggle');
+    menuToggle?.addEventListener('click', ()=> {
+      const nav = document.querySelector('nav ul');
+      if(!nav) return;
+      if(nav.style.display === 'flex') {
+        nav.style.display = '';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.background = 'white';
+        nav.style.position = 'absolute';
+        nav.style.right = '20px';
+        nav.style.top = '72px';
+        nav.style.padding = '12px';
+        nav.style.borderRadius = '12px';
+        nav.style.boxShadow = '0 10px 30px rgba(2,6,23,0.08)';
+      }
+    });
+
+    // Gallery modal
+    const gallery = document.getElementById('galleryGrid');
+    const tpl = document.getElementById('modalTpl');
+    gallery?.addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      const clone = tpl.content.cloneNode(true);
+      const modal = clone.querySelector('.modal');
+      modal.querySelector('img').src = img.src;
+      modal.querySelector('img').alt = img.alt || 'Bild';
+      document.body.appendChild(modal);
+      modal.querySelector('.close-btn').addEventListener('click', ()=> modal.remove());
+      modal.addEventListener('click', (ev)=> { if(ev.target === modal) modal.remove(); });
+    });
+
+    // Contact form (client-side mock)
+    const form = document.getElementById('contactForm');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const email = form.email.value.trim();
+      if(!name || !phone || !email){
+        alert('Bitte füllen Sie Name, Telefon und E-Mail aus.');
+        return;
+      }
+      // Mock send (in real life: POST to backend)
+      alert('Vielen Dank, ' + name + '! Ihre Nachricht wurde gesendet. Wir melden uns zeitnah.');
+      form.reset();
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',(e)=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Accessibility: focus visible for keyboard users
+    (function(){ 
+      const style = document.createElement('style');
+      style.innerHTML = ':focus{outline:2px solid rgba(10,132,255,0.22);outline-offset:3px}';
+      document.head.appendChild(style);
+    })();
+  </script>
+</body>
+</html>
