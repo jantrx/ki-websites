@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jens Dagne — Friseur in Worms</title>
+  <meta name="description" content="Moderner Friseursalon Jens Dagne in Worms. Haarschnitte, Colorationen, Stylings und mehr. Minimalistisches Design, hochwertige Beratung." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23000000'/%3E%3Ctext x='50' y='57' font-size='40' text-anchor='middle' fill='white' font-family='Arial,Helvetica,sans-serif'%3EJD%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#ffffff" />
+  <style>
+    :root{
+      --bg:#f7f7f8;
+      --card:#ffffff;
+      --muted:#6b6f76;
+      --accent:#0a84ff;
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+      --shadow: 0 6px 30px rgba(18,20,24,0.08);
+      --shadow-soft: 0 4px 18px rgba(18,20,24,0.06);
+      --max-width:1100px;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background: linear-gradient(180deg,var(--bg),#ffffff);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:36px 24px;}
+
+    header{
+      position:sticky;top:14px;z-index:50;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      margin:0 24px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
+    .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,#111827,#0b6cff);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;
+      box-shadow:var(--shadow-soft);
+    }
+    .brand h1{font-size:16px;margin:0}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:10px;}
+    nav a:hover{background:rgba(10,132,255,0.08);color:var(--accent)}
+    .cta{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#0062d6);color:white;font-weight:700;text-decoration:none;
+      box-shadow: 0 8px 30px rgba(10,132,255,0.14);
+    }
+    .hamburger{display:none;background:none;border:0;padding:8px;border-radius:10px}
+    .hero{
+      margin:36px 24px 24px;
+      border-radius:18px;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+      box-shadow:var(--shadow);
+    }
+    .hero-inner{display:flex;flex-direction:column;padding:48px;gap:22px;align-items:flex-start;}
+    .kicker{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(10,132,255,0.1);color:var(--accent);font-weight:700;font-size:13px}
+    .hero h2{margin:0;font-size:34px;line-height:1.02}
+    .hero p{margin:0;color:var(--muted);max-width:60ch}
+    .hero-actions{display:flex;gap:14px;margin-top:4px}
+    .btn{
+      padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer;background:var(--card);box-shadow:var(--shadow-soft);
+    }
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#0062d6);color:white}
+    .hero-media{
+      border-radius:14px;margin-top:18px;overflow:hidden;height:320px;background:linear-gradient(135deg,#f3f6fb,#ffffff);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+
+    main{padding:24px;}
+    .grid{display:grid;gap:20px}
+    .services{grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;gap:12px}
+    .service-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#eef6ff,#ffffff);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800}
+    .service-title{font-weight:700}
+    .service-desc{color:var(--muted);font-size:14px}
+    .pricing{margin-left:auto;font-weight:800}
+
+    .about{display:flex;gap:28px;align-items:center}
+    .about-photo{width:160px;height:160px;border-radius:16px;overflow:hidden;flex-shrink:0;box-shadow:var(--shadow)}
+    .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px;display:block;cursor:pointer;transition:transform .25s ease}
+    .gallery img:hover{transform:scale(1.03)}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea,select{
+      padding:12px;border-radius:10px;border:1px solid #e6e7eb;background:transparent;font-size:15px;
+    }
+    .hours{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow-soft)}
+    footer{margin-top:40px;padding:36px 24px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+    .socials{display:flex;gap:12px}
+    .chip{padding:8px 12px;border-radius:999px;background:#f3f4f6;font-weight:700}
+
+    /* modal */
+    .modal{
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);z-index:80;opacity:0;pointer-events:none;transition:opacity .18s ease;
+    }
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-card{width:92%;max-width:720px;background:var(--card);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+    .modal-grid{display:grid;grid-template-columns:1fr 120px;gap:12px}
+    .close{background:none;border:0;font-size:18px;padding:8px;border-radius:8px;color:var(--muted);cursor:pointer}
+
+    @media (max-width:980px){
+      .services{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+      header{margin:12px}
+      .hero{margin:12px;border-radius:14px}
+      .hamburger{display:inline-flex}
+      nav{display:none}
+    }
+    @media (max-width:520px){
+      .hero-inner{padding:28px}
+      .hero h2{font-size:24px}
+      .brand h1{font-size:14px}
+      .logo{width:48px;height:48px;font-size:16px}
+      .about{flex-direction:column;align-items:flex-start}
+      .about-photo{width:100%;height:220px}
+      .gallery img{height:120px}
+    }
+  </style>
+</head>
+<body>
+  <header aria-hidden="false">
+    <div class="nav-wrap container" role="navigation" aria-label="Hauptnavigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">JD</div>
+        <div>
+          <h1>Jens Dagne</h1>
+          <div style="color:var(--muted);font-size:13px;margin-top:2px">Friseur | Worms</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#team">Team</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#anfahrt">Anfahrt</a>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <a class="cta" href="tel:+496231234567" aria-label="Anrufen">Anrufen</a>
+        <button class="hamburger" id="openMenu" aria-label="Menü öffnen">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" aria-label="Willkommen">
+      <div class="hero-inner">
+        <span class="kicker">Seit 2006 • Worms</span>
+        <h2>Ihr moderner Friseursalon in Worms — klar, reduziert, individuell.</h2>
+        <p>Bei Jens Dagne verbinden wir klassische Handwerkskunst mit modernen Looks. Präzise Schnitte, natürliche Colorationen und persönliche Beratung in entspannter Atmosphäre.</p>
+        <div class="hero-actions">
+          <button class="btn primary" id="bookBtn">Termin buchen</button>
+          <a class="btn" href="#leistungen">Leistungen ansehen</a>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:6px">
+          <div style="display:flex;gap:10px;align-items:center;color:var(--muted)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 11c1.657 0 3-1.567 3-3.5S13.657 4 12 4s-3 1.567-3 3.5S10.343 11 12 11zM6.5 20c0-3.314 3.357-6 7.5-6s7.5 2.686 7.5 6v1H6.5v-1z" stroke="#9BA3AE" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div style="font-weight:700">Hauptstraße 12, 67547 Worms</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media" role="img" aria-label="Friseursalon Innenansicht">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=2bd23b64d65a7ee8f0f0b87d67f3f10b" alt="Salon Innenraum" />
+      </div>
+    </section>
+
+    <section class="container" id="leistungen" aria-labelledby="leistungen-title" style="margin-top:18px">
+      <h3 id="leistungen-title" style="margin:0 0 12px 0;font-size:20px">Leistungen</h3>
+      <div class="grid services" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card" aria-label="Haarschnitt">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="service-icon">✂️</div>
+            <div>
+              <div class="service-title">Haarschnitt</div>
+              <div class="service-desc">Präzise Schnitte für Damen, Herren & Kinder. Individuelle Beratung inklusive.</div>
+            </div>
+            <div class="pricing">ab 28€</div>
+          </div>
+        </div>
+
+        <div class="card" aria-label="Colorationen">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="service-icon">🎨</div>
+            <div>
+              <div class="service-title">Coloration</div>
+              <div class="service-desc">Natürliche Tönungen, Strähnen oder umfassende Farbwechsel mit hochwertigen Produkten.</div>
+            </div>
+            <div class="pricing">ab 45€</div>
+          </div>
+        </div>
+
+        <div class="card" aria-label="Styling & Pflege">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="service-icon">✨</div>
+            <div>
+              <div class="service-title">Styling & Pflege</div>
+              <div class="service-desc">Styling für jeden Anlass, schonende Pflege und Haaraufbaukur.</div>
+            </div>
+            <div class="pricing">ab 18€</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="team" style="margin-top:28px">
+      <h3 style="margin:0 0 12px 0;font-size:20px">Über uns</h3>
+      <div class="card about" style="padding:18px">
+        <div class="about-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5c7e92ffd8a4f5bfc9171b6e247a5b55" alt="Jens Dagne Portrait" />
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px 0">Jens Dagne — Inhaber & Stylist</h4>
+          <p style="margin:0 0 10px;color:var(--muted)">Mit über 15 Jahren Erfahrung in modernem Hairstyling liegt mein Fokus auf klaren Formen, natürlichen Farben und nachhaltigen Produkten. Bei uns steht Beratung an erster Stelle — damit Sie Ihren Look jeden Tag gern tragen.</p>
+          <div style="display:flex;gap:8px">
+            <a class="btn" href="mailto:info@jensdagne.de">E-Mail</a>
+            <a class="btn primary" href="#kontakt">Jetzt Termin</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="galerie" style="margin-top:28px">
+      <h3 style="margin:0 0 12px 0;font-size:20px">Galerie</h3>
+      <div class="gallery" aria-hidden="false">
+        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0e12b32f1f1e2b2b7500b9c9123d8d8e" alt="Haarschnitt 1" data-large="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=0e12b32f1f1e2b2b7500b9c9123d8d8e">
+        <img src="https://images.unsplash.com/photo-1512446819445-4c1a92d6b9d9?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=a9b2d7b4b9f86ae9b2b2f9a6f7d8d4a8" alt="Haarschnitt 2" data-large="https://images.unsplash.com/photo-1512446819445-4c1a92d6b9d9?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=a9b2d7b4b9f86ae9b2b2f9a6f7d8d4a8">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b2a4af9c1d4c9d8b3b7f2f5e0d6e4a1" alt="Coloration" data-large="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b2a4af9c1d4c9d8b3b7f2f5e0d6e4a1">
+        <img src="https://images.unsplash.com/photo-1556228720-3b77b53d9e19?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=38b3d3a4c2d7f6f4e4f4c3d2a8b9a7c6" alt="Styling" data-large="https://images.unsplash.com/photo-1556228720-3b77b53d9e19?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=38b3d3a4c2d7f6f4e4f4c3d2a8b9a7c6">
+      </div>
+    </section>
+
+    <section class="container" id="kontakt" style="margin-top:28px">
+      <h3 style="margin:0 0 12px 0;font-size:20px">Kontakt & Öffnungszeiten</h3>
+      <div class="contact-grid" style="margin-top:12px">
+        <div>
+          <form id="contactForm" aria-label="Kontaktformular">
+            <input type="text" id="name" name="name" placeholder="Ihr Name" required />
+            <input type="email" id="email" name="email" placeholder="E-Mail" required />
+            <input type="tel" id="phone" name="phone" placeholder="Telefon (optional)" />
+            <select id="service" name="service" aria-label="Gewünschte Leistung">
+              <option value="">Gewünschte Leistung</option>
+              <option>Haarschnitt</option>
+              <option>Coloration</option>
+              <option>Styling</option>
+              <option>Beratung</option>
+            </select>
+            <textarea id="message" name="message" rows="4" placeholder="Ihre Nachricht / Terminwunsch"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+              <button type="submit" class="btn primary">Nachricht senden</button>
+              <button type="button" class="btn" onclick="location.href='tel:+496231234567'">Anrufen</button>
+            </div>
+            <div id="formMsg" style="color:green;font-size:14px;margin-top:8px;display:none">Vielen Dank! Wir melden uns schnellstmöglich.</div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="hours" aria-label="Öffnungszeiten">
+            <h4 style="margin:0 0 6px 0">Öffnungszeiten</h4>
+            <div style="color:var(--muted);margin-bottom:8px">
+              Mo — Fr: 09:00 — 18:00<br>
+              Sa: 08:00 — 13:00<br>
+              So: geschlossen
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <div style="font-weight:700">Kontakt</div>
+              <div style="color:var(--muted)">Tel: <a href="tel:+496231234567" style="color:var(--accent);text-decoration:none">+49 6231 234567</a></div>
+              <div style="color:var(--muted)">E-Mail: <a href="mailto:info@jensdagne.de" style="color:var(--accent);text-decoration:none">info@jensdagne.de</a></div>
+            </div>
+            <div style="margin-top:12px">
+              <a class="chip" href="#anfahrt">Anfahrt anzeigen</a>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-soft)">
+            <iframe title="Anfahrt zu Jens Dagne in Worms" src="https://www.google.com/maps?q=49.6333,8.3667&z=15&output=embed" style="width:100%;height:220px;border:0"></iframe>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container" role="contentinfo">
+    <div style="display:flex;gap:16px;align-items:center">
+      <div>
+        <div style="font-weight:700">Jens Dagne</div>
+        <div style="color:var(--muted)">Hauptstraße 12, 67547 Worms</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="socials" aria-hidden="true">
+        <a href="#" title="Instagram" style="text-decoration:none;color:var(--muted)">IG</a>
+        <a href="#" title="Facebook" style="text-decoration:none;color:var(--muted)">FB</a>
+      </div>
+      <div style="color:var(--muted);font-size:13px">© <span id="year"></span> Jens Dagne</div>
+    </div>
+  </footer>
+
+  <!-- Modal: Booking -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="margin:0">Termin buchen</h4>
+        <button class="close" id="closeModal" aria-label="Schließen">&times;</button>
+      </div>
+      <div style="color:var(--muted);margin-bottom:10px">Wählen Sie bevorzugtes Datum & Uhrzeit oder schreiben Sie uns einen Wunsch — wir bestätigen Ihre Anfrage zeitnah.</div>
+      <form id="bookingForm" class="modal-grid">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input type="text" id="bname" placeholder="Ihr Name" required>
+          <input type="email" id="bemail" placeholder="E-Mail" required>
+          <input type="tel" id="bphone" placeholder="Telefon">
+          <select id="bservice">
+            <option>Haarschnitt</option>
+            <option>Coloration</option>
+            <option>Styling</option>
+            <option>Beratung</option>
+          </select>
+          <textarea id="bnote" rows="3" placeholder="Ihre Nachricht / Terminwunsch"></textarea>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:stretch">
+          <label style="font-weight:700;color:var(--muted);font-size:13px">Datum</label>
+          <input type="date" id="bdate" required>
+          <label style="font-weight:700;color:var(--muted);font-size:13px">Uhrzeit</label>
+          <input type="time" id="btime" required>
+          <div style="margin-top:auto;display:flex;gap:8px">
+            <button class="btn primary" type="submit">Anfragen</button>
+            <button class="btn" type="button" id="cancelBooking">Abbrechen</button>
+          </div>
+        </div>
+      </form>
+      <div id="bookingMsg" style="color:green;font-size:14px;margin-top:10px;display:none">Ihre Anfrage wurde gesendet. Wir melden uns bald.</div>
+    </div>
+  </div>
+
+  <script>
+    // Small interactive behavior
+    (function(){
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      var modal = document.getElementById('modal');
+      var bookBtn = document.getElementById('bookBtn');
+      var closeModal = document.getElementById('closeModal');
+      var cancelBooking = document.getElementById('cancelBooking');
+      var bookingForm = document.getElementById('bookingForm');
+      var bookingMsg = document.getElementById('bookingMsg');
+
+      function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+      function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; bookingMsg.style.display='none'; bookingForm.style.display='grid'; bookingForm.reset(); }
+
+      bookBtn.addEventListener('click', openModal);
+      closeModal.addEventListener('click', close);
+      cancelBooking.addEventListener('click', close);
+
+      bookingForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        bookingForm.style.display='none';
+        bookingMsg.style.display='block';
+        // Simulate submission (replace with fetch to server)
+        setTimeout(close, 1600);
+      });
+
+      // Contact form
+      var contactForm = document.getElementById('contactForm');
+      var formMsg = document.getElementById('formMsg');
+      contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        formMsg.style.display='block';
+        contactForm.reset();
+        setTimeout(function(){ formMsg.style.display='none' }, 2800);
+      });
+
+      // Gallery modal preview
+      var galleryImgs = document.querySelectorAll('.gallery img');
+      galleryImgs.forEach(function(img){
+        img.addEventListener('click', function(){
+          var src = this.dataset.large || this.src;
+          openModal();
+          // inject preview
+          bookingForm.style.display='none';
+          bookingMsg.style.display='none';
+          var modalCard = document.querySelector('.modal-card');
+          // create image preview
+          var preview = modalCard.querySelector('.preview-img');
+          if(preview){ preview.src = src; }
+          else {
+            var imgEl = document.createElement('img');
+            imgEl.className = 'preview-img';
+            imgEl.src = src;
+            imgEl.style.width = '100%';
+            imgEl.style.maxHeight = '420px';
+            imgEl.style.objectFit = 'cover';
+            imgEl.style.borderRadius = '10px';
+            imgEl.style.marginTop = '8px';
+            modalCard.appendChild(imgEl);
+          }
+        });
+      });
+
+      // Close modal on backdrop click
+      modal.addEventListener('click', function(e){
+        if(e.target === modal) close();
+      });
+
+      // Simple hamburger for small screens
+      var openMenu = document.getElementById('openMenu');
+      var headerNav = document.querySelector('nav');
+      openMenu.addEventListener('click', function(){
+        if(headerNav.style.display === 'flex') headerNav.style.display = 'none';
+        else headerNav.style.display = 'flex';
+      });
+    })();
+  </script>
+</body>
+</html>
