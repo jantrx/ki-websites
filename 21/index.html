@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DEWE Service — Anlagenservice, Wartung & Störungsdienst</title>
+  <meta name="description" content="DEWE Service — Wartung, Störungsdienst, Ersatzteile, Modernisierung und Anlagenoptimierung. 24/7 Notdienst, qualifizierte Techniker und maßgeschneiderte Serviceverträge." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1f35;
+      --card:#0f2740;
+      --glass: rgba(255,255,255,0.06);
+      --accent:#00c8e0;
+      --accent-2:#00a8d0;
+      --muted: rgba(255,255,255,0.65);
+      --glass-border: rgba(255,255,255,0.06);
+      --radius: 14px;
+      --glass-strong: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(600px 300px at 10% 10%, rgba(0,200,224,0.06), transparent 8%),
+        radial-gradient(500px 250px at 90% 90%, rgba(0,200,224,0.03), transparent 6%),
+        var(--bg);
+      color: #eaf6fb;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+      padding-top:80px; /* nav height */
+    }
+
+    /* NAV */
+    .nav{
+      position:fixed;
+      top:16px;
+      left:50%;
+      transform:translateX(-50%);
+      width:calc(100% - 48px);
+      max-width:1200px;
+      z-index:999;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid var(--glass-border);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      box-shadow: 0 6px 30px rgba(2,8,23,0.6);
+      gap:12px;
+    }
+    .logo{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo-mark{
+      width:44px;height:44px;
+      border-radius:10px;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,200,224,0.12);
+      font-weight:800;color:#04212b;font-size:18px;
+    }
+    .brand{font-weight:700;font-size:16px;color:var(--accent); letter-spacing:0.2px}
+    .nav-links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:500;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:10px;
+    }
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.03)}
+    .nav-cta{display:flex;gap:10px;align-items:center}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 16px;border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#02242a;font-weight:700;font-size:14px;
+      border: none;
+      cursor:pointer;
+      box-shadow: 0 8px 30px rgba(0,200,224,0.12);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .pill:active{transform:translateY(1px)}
+    .ghost{
+      padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.04); color:var(--muted)
+    }
+
+    /* HERO */
+    .hero{
+      max-width:1200px;
+      margin:48px auto 64px;
+      padding:48px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);
+      display:flex;
+      gap:32px;
+      align-items:center;
+      position:relative;
+      overflow:visible;
+    }
+    .hero-left{flex:1;min-width:280px}
+    .kicker{
+      display:inline-block;
+      background:rgba(0,200,224,0.08);
+      color:var(--accent);
+      padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:18px;
+      border:1px solid rgba(0,200,224,0.08);
+    }
+    h1{
+      margin:0 0 18px 0;
+      font-size:34px;
+      line-height:1.02;
+      font-weight:800;
+      color: #e9fbff;
+    }
+    p.lead{
+      margin:0 0 22px 0;color:var(--muted);font-size:15px;line-height:1.5;
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-secondary{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 14px;border-radius:999px;font-weight:600;cursor:pointer;
+    }
+
+    .hero-right{
+      width:420px;max-width:44%;
+      display:flex;justify-content:center;align-items:center;
+      position:relative;
+    }
+    .hero-card{
+      width:100%;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 12px 40px rgba(2,8,23,0.6);
+      transform:translateY(0);
+      transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    }
+    .hero-card:hover{transform:translateY(-6px);box-shadow: 0 20px 60px rgba(2,8,23,0.72)}
+    .hero-card small{color:var(--muted);display:block;margin-bottom:8px;font-weight:600}
+    .hero-card h3{margin:0 0 12px 0;font-size:18px;color:#eafcff}
+    .hero-stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:10px;border-radius:10px;flex:1;min-width:110px;border:1px solid rgba(255,255,255,0.02)}
+    .stat b{display:block;font-size:18px;color:#fff}
+    .stat span{font-size:13px;color:var(--muted)}
+
+    /* SERVICES GRID */
+    .section{max-width:1200px;margin:48px auto;padding:24px}
+    .section h2{font-size:20px;margin:0 0 18px 0;color:#eaffff}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:18px;
+    }
+    @media (max-width:980px){ .grid{grid-template-columns: repeat(2,1fr)} .hero{flex-direction:column} .hero-right{max-width:100%;width:100%} }
+    @media (max-width:640px){ .grid{grid-template-columns: 1fr} .nav{left:12px;right:12px;transform:none;width:calc(100% - 24px)} body{padding-top:96px} .hero{padding:18px;margin:18px} .hero-left h1{font-size:24px} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s, border-color .18s;
+      cursor:default;
+      display:flex;gap:14px;align-items:flex-start;
+      overflow:hidden;
+    }
+    .card .icon{
+      width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg, rgba(0,200,224,0.12), rgba(0,168,208,0.06)); border:1px solid rgba(0,200,224,0.06);
+      flex-shrink:0;
+    }
+    .card h3{margin:0;font-size:16px}
+    .card p{margin:6px 0 0 0;color:var(--muted);font-size:14px}
+
+    .card:hover{
+      transform: translateY(-10px) rotateX(2deg);
+      box-shadow: 0 28px 60px rgba(2,8,23,0.7);
+      border-color: rgba(0,200,224,0.16);
+    }
+
+    /* CTA BAND */
+    .cta-band{
+      margin:36px auto;
+      max-width:1200px;
+      border-radius:14px;
+      padding:18px 22px;
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+      background: linear-gradient(90deg, rgba(0,200,224,0.06), rgba(0,168,208,0.02));
+      border:1px solid rgba(0,200,224,0.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    .cta-text{flex:1}
+    .cta-text h3{margin:0;font-size:18px}
+    .cta-text p{margin:6px 0 0 0;color:var(--muted)}
+    .cta-actions{display:flex;gap:12px;align-items:center}
+
+    /* FOOTER */
+    footer{
+      margin-top:48px;padding:40px 20px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+    .footer-col{flex:1;min-width:220px}
+    .footer-col h4{margin:0 0 12px 0;color:#e9fbff}
+    .footer-col p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .socials{display:flex;gap:10px;margin-top:12px}
+    .socials a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.02)}
+
+    /* ANIMATIONS */
+    .reveal{opacity:0;transform:translateY(18px) scale(.995);transition: all .8s cubic-bezier(.2,.9,.2,1);}
+    .reveal.in-view{opacity:1;transform:translateY(0) scale(1);}
+
+    /* small utilities */
+    .muted{color:var(--muted);}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace}
+    a.no-decor{text-decoration:none;color:inherit}
+
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true">DE</div>
+      <div>
+        <div class="brand">DEWE Service</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Anlagen | Wartung | 24/7 Notdienst</div>
+      </div>
+    </div>
+
+    <div class="nav-links" aria-hidden="false">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#notdienst">Notdienst</a>
+    </div>
+
+    <div class="nav-cta">
+      <button class="ghost" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Angebot anfragen</button>
+      <button class="pill" onclick="document.getElementById('leistungen').scrollIntoView({behavior:'smooth'})">Leistungen ansehen</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero reveal" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <span class="kicker">Kompetenter Service — Regional & National</span>
+        <h1 id="hero-title">Zuverlässiger Anlagenservice, Wartung & 24/7 Störungsdienst</h1>
+        <p class="lead">Wir sorgen dafür, dass Ihre Anlagen sicher, effizient und ausfallfrei laufen. Von regelmäßiger Wartung über Ersatzteilversorgung bis zur Modernisierung — unser Team bietet maßgeschneiderte Servicekonzepte für Industrie- und Gewerbekunden.</p>
+
+        <div class="hero-actions">
+          <button class="pill" onclick="document.getElementById('leistungen').scrollIntoView({behavior:'smooth'})">Unsere Leistungen</button>
+          <button class="btn-secondary" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Kontakt & Angebot</button>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;gap:8px;align-items:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v6" stroke="url(#g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <small class="muted">Schnelle Reaktionszeiten</small>
+          <h3>24/7 Notdienst & Störungsbehebung</h3>
+          <div class="hero-stats" style="margin-top:12px">
+            <div class="stat"><b>24/7</b><span>Rund-um-die-Uhr erreichbar</span></div>
+            <div class="stat"><b>2–4 h</b><span>Durchschnittliche Reaktionszeit</span></div>
+            <div class="stat"><b>Region</b><span>Landesweit / Vor-Ort</span></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="leistungen" class="section reveal" aria-labelledby="services-title">
+      <h2 id="services-title">Unsere Serviceleistungen</h2>
+      <p class="muted" style="margin:6px 0 18px 0">Flexible Serviceverträge, kurzfristige Einsätze und technische Lösungen für Ihre Anlagen — transparent, kompetent und dokumentiert.</p>
+
+      <div class="grid">
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2v4" stroke="url(#a1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Störungsdienst & Reparatur</h3>
+            <p>24/7 Störungsannahme, schnelle Fehlerdiagnose vor Ort und fachgerechte Reparaturen durch unsere zertifizierten Techniker.</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 20v-6" stroke="url(#a2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Wartung & Inspektion</h3>
+            <p>Regelmäßige Prüfungen, vorbeugende Instandhaltung und transparente Wartungspläne zur Maximierung Ihrer Anlagenverfügbarkeit.</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="url(#a3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Ersatzteile & Lager</h3>
+            <p>Schnelle Versorgung mit Original- und alternativen Ersatzteilen über unseren Lagerbestand und express Logistik.</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 6h16" stroke="url(#a4)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Anlagenoptimierung</h3>
+            <p>Analyse, Effizienzsteigerung und Retrofit-Maßnahmen zur Reduktion von Energieverbrauch und Ausfallzeiten.</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="url(#a5)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Modernisierung & Retrofit</h3>
+            <p>Technische Nachrüstung bestehender Anlagen mit moderner Steuerungs- und Überwachungstechnik.</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 12H3" stroke="url(#a6)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Consulting & Schulungen</h3>
+            <p>Individuelle Beratung, Risikoanalysen und Schulungen für Mitarbeiter zu Betrieb, Wartung und Arbeitssicherheit.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="referenzen" class="section reveal" aria-labelledby="refs-title">
+      <h2 id="refs-title">Referenzen & Branchen</h2>
+      <p class="muted" style="margin:6px 0 16px 0">Wir betreuen Kunden aus Produktion, Lebensmittelindustrie, Abwasser- und Wasserwirtschaft sowie Gewerbe- und Industrieanlagen.</p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <div style="background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-width:160px">Produktion & Fertigung</div>
+        <div style="background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-width:160px">Lebensmittelindustrie</div>
+        <div style="background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-width:160px">Wasser & Abwasser</div>
+        <div style="background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-width:160px">Gebäude & Infrastruktur</div>
+      </div>
+    </section>
+
+    <section id="notdienst" class="cta-band reveal" aria-labelledby="cta-title">
+      <div class="cta-text">
+        <h3 id="cta-title">24/7 Notdienst — Wir sind für Sie da</h3>
+        <p class="muted">Schnelle Hilfe bei Störungen: Rufen Sie unsere Notfall-Hotline an oder senden Sie uns eine Anfrage — wir reagieren sofort.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="pill" href="tel:+491234567890" aria-label="Notdienst anrufen">Jetzt anrufen</a>
+        <a class="btn-secondary" href="#kontakt" aria-label="Notdienst kontaktieren">Kontaktformular</a>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section reveal" aria-labelledby="kontakt-title">
+      <h2 id="kontakt-title">Kontakt & Angebot</h2>
+      <p class="muted" style="margin:6px 0 18px 0">Schildern Sie uns kurz Ihr Anliegen — wir melden uns innerhalb weniger Stunden mit einem konkreten Vorschlag.</p>
+
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <form style="flex:1;min-width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)" onsubmit="event.preventDefault(); alert('Vielen Dank! Ihre Anfrage wurde übermittelt.');">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <input required name="name" placeholder="Name / Firma" style="flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"/>
+            <input required name="phone" placeholder="Telefon" style="flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"/>
+            <input required name="email" placeholder="E-Mail" style="flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"/>
+          </div>
+          <textarea name="message" placeholder="Kurz Ihr Anliegen / Anlage / Störung" rows="4" style="width:100%;margin-top:12px;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+          <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+            <button class="pill" type="submit">Anfrage senden</button>
+            <button class="btn-secondary" type="reset">Zurücksetzen</button>
+          </div>
+        </form>
+
+        <div style="width:320px;min-width:280px">
+          <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)">
+            <h4 style="margin:0 0 8px 0">Kontakt</h4>
+            <p class="muted" style="margin:0">Telefon: <a class="no-decor mono" href="tel:+491234567890" style="color:var(--accent)">+49 123 456 7890</a><br/>E-Mail: <a class="no-decor mono" href="mailto:service@deweservice.example" style="color:var(--accent)">service@deweservice.example</a></p>
+
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.02);margin:12px 0"/>
+
+            <h4 style="margin:0 0 8px 0">Adresse</h4>
+            <p class="muted" style="margin:0">DEWE Service GmbH<br/>Musterstraße 12<br/>12345 Musterstadt</p>
+
+            <div class="socials" style="margin-top:12px">
+              <a href="#" aria-label="LinkedIn" title="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9v9M6 6a2 2 0 100-4 2 2 0 000 4zM10 15v3M18 9v6M14 9v6" stroke="rgba(255,255,255,0.8)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#" aria-label="X / Twitter" title="X / Twitter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M23 4.5c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.7.4-1.6.8-2.5 1-1.7-1.8-4.6-1.5-6.3.5-1 1.3-1 3 0 4.2-3.6-.2-6.8-1.9-9-4.6-.9 1.5-.4 3.6 1.1 4.6-.6 0-1.2-.2-1.7-.5 0 1.8 1.2 3.4 2.9 3.8-.5.1-1 .2-1.5.1.4 1.3 1.7 2.2 3.2 2.2-1.2 1-2.8 1.6-4.4 1.6h-1.1c1.7 1.1 3.7 1.7 5.7 1.7 7 0 10.8-5.8 10.8-10.8v-.5c.7-.5 1.2-1.1 1.6-1.8z" stroke="rgba(255,255,255,0.8)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>DEWE Service</h4>
+        <p class="muted">Zuverlässiger Service für Ihre technischen Anlagen. Wartung, Reparatur, Ersatzteile und Modernisierung – kompetent und schnell.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quicklinks</h4>
+        <p style="margin:0"><a href="#leistungen" class="no-decor muted">Leistungen</a><br/><a href="#notdienst" class="no-decor muted">Notdienst</a><br/><a href="#kontakt" class="no-decor muted">Kontakt</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Impressum</h4>
+        <p class="muted" style="margin:0">DEWE Service GmbH<br/>Musterstraße 12<br/>12345 Musterstadt</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <p class="muted" style="margin:0">Tel: <a class="no-decor mono" href="tel:+491234567890" style="color:var(--accent)">+49 123 456 7890</a><br/>E-Mail: <a class="no-decor mono" href="mailto:service@deweservice.example" style="color:var(--accent)">service@deweservice.example</a></p>
+      </div>
+    </div>
+
+    <div style="max-width:1200px;margin:18px auto 40px auto;color:var(--muted);font-size:13px;text-align:center">© <span id="year"></span> DEWE Service — Alle Rechte vorbehalten.</div>
+  </footer>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // IntersectionObserver for reveals
+    (function(){
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, {threshold: 0.12});
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+      });
+    })();
+
+    // tiny effect: hover parallax on hero-right card
+    const heroCard = document.querySelector('.hero-card');
+    const heroRight = document.querySelector('.hero-right');
+    if(heroCard && heroRight){
+      heroRight.addEventListener('mousemove', (e) => {
+        const r = heroRight.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const tx = (px - 0.5) * 10;
+        const ty = (py - 0.5) * 6;
+        heroCard.style.transform = `translateY(${ -6 + ty }px) rotateX(${ (py-0.5) * 2 }deg) rotateY(${ (px-0.5) * 2 }deg)`;
+      });
+      heroRight.addEventListener('mouseleave', () => {
+        heroCard.style.transform = `translateY(0)`;
+      });
+    }
+
+    // Smooth keyboard focus for nav links (accessible)
+    document.querySelectorAll('.nav a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        // no-op, smooth handled by CSS scroll-behavior
+      });
+    });
+
+    // small accessibility: focus visible outline
+    (function(){
+      function handleFirstTab(e) {
+        if(e.key === 'Tab') {
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
+
+  <!-- decorative gradients for inline svgs (no external defs used earlier) -->
+  <svg style="position:absolute;width:0;height:0;visibility:hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="a1" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+      <linearGradient id="a2" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+      <linearGradient id="a3" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+      <linearGradient id="a4" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+      <linearGradient id="a5" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+      <linearGradient id="a6" x1="0" x2="1"><stop offset="0" stop-color="#00c8e0"/><stop offset="1" stop-color="#00a8d0"/></linearGradient>
+    </defs>
+  </svg>
+
+</body>
+</html>
