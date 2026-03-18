@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scherer Heizungsbetrieb • Worms</title>
+  <meta name="description" content="Scherer Heizungsbetrieb in Worms — Ihr Profi für Heizungsinstallation, Wartung und Notdienst. Persönlich, zuverlässig, regional." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    // Tailwind base config: custom colors & font
+    window.tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              'scherer-red': '#c1121f',
+              'scherer-red-600': '#a30f1b',
+              'scherer-dark': '#0b0f13',
+              'scherer-gray': '#f6f7f9'
+            },
+            fontFamily: {
+              sans: ['Poppins', 'ui-sans-serif', 'system-ui']
+            },
+            boxShadow: {
+              smd: '0 6px 30px rgba(17, 24, 39, 0.12)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Custom animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp { animation: fadeUp 700ms cubic-bezier(.2,.9,.2,1) both; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+    .float-slow { animation: float 4s ease-in-out infinite; }
+
+    /* subtle glass effect for dark cards */
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* focus ring override for better contrast */
+    .focus-ring:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(193, 18, 31, 0.12);
+    }
+
+    /* small adjustments for the SVG logo text rendering */
+    .logo-text { font-weight: 700; letter-spacing: -0.02em; }
+
+    /* Decorative gradient line */
+    .grad-line {
+      background: linear-gradient(90deg, rgba(193,18,31,1) 0%, rgba(166,24,28,1) 50%, rgba(115,17,20,1) 100%);
+      height: 4px;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body class="antialiased text-slate-800 bg-white font-sans">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/75 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between py-4">
+        <a href="#home" class="flex items-center gap-3">
+          <!-- Inline SVG logo (flame + Scherer) styled to CI red -->
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#ff5a5a"/>
+                <stop offset="1" stop-color="#c1121f"/>
+              </linearGradient>
+            </defs>
+            <rect width="64" height="64" rx="12" fill="url(#g1)"/>
+            <path d="M28 40c0-6 6-10 6-16 0-6-6-10-10-10 0 0-6 8-6 16 0 10 10 16 10 16z" fill="#fff" opacity="0.95"/>
+            <path d="M36 26c0 6-8 8-8 14 0 0 4 0 8-4 6-6 6-10 6-10s-3 0-6 0z" fill="#fff" opacity="0.18"/>
+          </svg>
+          <div class="hidden sm:block">
+            <span class="block text-slate-900 text-lg logo-text">Scherer</span>
+            <span class="block text-slate-500 text-xs -mt-0.5">Heizungsbetrieb • Worms</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#services" class="text-sm font-medium text-slate-700 hover:text-slate-900">Leistungen</a>
+          <a href="#about" class="text-sm font-medium text-slate-700 hover:text-slate-900">Über uns</a>
+          <a href="#contact" class="text-sm font-medium text-slate-700 hover:text-slate-900">Kontakt</a>
+          <a href="#notdienst" class="text-sm font-medium text-slate-700 hover:text-slate-900">Notdienst</a>
+          <a href="#contact" class="ml-2 inline-flex items-center px-4 py-2 rounded-md text-white bg-gradient-to-r from-[#ff6b6b] to-[#c1121f] shadow-sm hover:from-[#ff5a5a] hover:to-[#a30f1b]">
+            Beratung anfragen
+          </a>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="menuBtn" aria-label="Menü öffnen" class="p-2 rounded-md focus-ring">
+            <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-slate-100">
+      <div class="px-4 pb-4 space-y-3">
+        <a href="#services" class="block py-2 text-base font-medium text-slate-700">Leistungen</a>
+        <a href="#about" class="block py-2 text-base font-medium text-slate-700">Über uns</a>
+        <a href="#notdienst" class="block py-2 text-base font-medium text-slate-700">Notdienst</a>
+        <a href="#contact" class="block py-2 text-base font-medium text-slate-700">Kontakt</a>
+        <a href="#contact" class="block py-2 text-center text-white rounded-md bg-gradient-to-r from-[#ff6b6b] to-[#c1121f]">Beratung anfragen</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <div class="max-w-2xl">
+            <p class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#ff6b6b] to-[#c1121f] shadow-sm">
+              Regional • Zuverlässig
+            </p>
+
+            <h1 class="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+              Scherer Heizungsbetrieb — Ihr Heizungsprofi in Worms
+            </h1>
+
+            <p class="mt-4 text-lg text-slate-600">
+              Planung, Installation und Wartung von Heizungsanlagen. Effizient, nachhaltig und persönlich — wir sind vor Ort, wenn Sie uns brauchen.
+            </p>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="#contact" class="inline-flex items-center justify-center px-5 py-3 rounded-md text-white text-sm font-semibold bg-gradient-to-r from-[#ff6b6b] to-[#c1121f] shadow-sm hover:scale-[1.01] transform transition">
+                Jetzt Beratung anfragen
+              </a>
+              <a href="#services" class="inline-flex items-center justify-center px-5 py-3 rounded-md text-slate-700 bg-white border border-slate-200 text-sm font-medium hover:shadow-sm">
+                Unsere Leistungen
+              </a>
+            </div>
+
+            <div class="mt-8 grid grid-cols-3 gap-3 sm:gap-4">
+              <div class="bg-slate-50 p-3 rounded-md shadow-sm flex items-center gap-3">
+                <svg class="w-8 h-8 text-[#c1121f]" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10v4a5 5 0 0010 0v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="text-sm">
+                  <div class="font-semibold text-slate-900">Installation</div>
+                  <div class="text-slate-500">Neuanlagen & Austausch</div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-3 rounded-md shadow-sm flex items-center gap-3">
+                <svg class="w-8 h-8 text-[#c1121f]" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 12h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 6v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div class="text-sm">
+                  <div class="font-semibold text-slate-900">Wartung</div>
+                  <div class="text-slate-500">Regelmäßig & zuverlässig</div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-3 rounded-md shadow-sm flex items-center gap-3">
+                <svg class="w-8 h-8 text-[#c1121f]" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 20H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div class="text-sm">
+                  <div class="font-semibold text-slate-900">Notdienst</div>
+                  <div class="text-slate-500">Schnell & kompetent</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 text-sm text-slate-500">
+              Kostenloses Beratungsgespräch • Fördermittelberatung • 24/7 Erreichbarkeit für Notfälle
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 hidden lg:block">
+          <div class="relative">
+            <div class="grad-line w-24 mb-6"></div>
+            <div class="p-6 glass-card rounded-2xl shadow-smd float-slow">
+              <div class="bg-gradient-to-tr from-[#fff1f1] to-[#fff7f7] p-6 rounded-xl">
+                <img src="data:image/svg+xml;utf8,
+                  <svg xmlns='http://www.w3.org/2000/svg' width='720' height='480' viewBox='0 0 720 480'>
+                    <rect rx='20' width='720' height='480' fill='%23fff7f7'/>
+                    <g transform='translate(60,60)'>
+                      <rect width='600' height='360' rx='18' fill='%23fff'/>
+                      <g transform='translate(40,40)'>
+                        <path d='M60 0c0 33-26 60-26 60s-34 12-34 44c0 34 26 56 34 66 8 10 34 14 34 14s46 0 78-10c32-10 78-36 78-80 0-40-34-94-34-94s-20-22-46-28c-26-6-80-2-104-2z' fill='%23c1121f' opacity='0.95'/>
+                        <text x='160' y='200' font-family='Poppins, sans-serif' font-size='28' fill='%23333'>Moderne Heizungsanlage</text>
+                      </g>
+                    </g>
+                  </svg>" alt="Illustration Heizungsanlage" class="rounded-lg shadow-md">
+                <div class="mt-4 text-sm text-slate-700">Effiziente Lösungen: Brennwerttechnik, Wärmepumpen & Hybrid-Systeme.</div>
+              </div>
+            </div>
+            <div class="absolute -right-6 -bottom-8 w-36 h-36 rounded-xl bg-gradient-to-b from-[#ffefef] to-[#ffecec] shadow-lg flex items-center justify-center">
+              <div class="text-xs text-[#8b0b0b] font-semibold">24/7 Notdienst</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Services -->
+  <section id="services" class="bg-slate-50 border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-lg font-semibold text-slate-700">Unsere Leistungen</h2>
+        <p class="mt-2 text-3xl font-extrabold text-slate-900">Kompetent von Planung bis Service</p>
+        <p class="mt-3 text-slate-600">Individuelle Lösungen für Einfamilienhäuser, Gewerbe und Wohnanlagen — nachhaltig und wirtschaftlich.</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#ffecec] to-[#fff1f1]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M12 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 10v4a5 5 0 0010 0v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Heizungsinstallation</h3>
+              <p class="mt-1 text-sm text-slate-600">Neuanlagen, Austausch und Nachrüstungen mit modernster Technik.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Beratung vor Ort</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Anfragen →</a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#fff7f7] to-[#fff1f1]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 6v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Wartung & Service</h3>
+              <p class="mt-1 text-sm text-slate-600">Regelmäßige Inspektion, Reinigung und Optimierung für Sicherheit und Effizienz.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Wartungspläne</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Mehr erfahren →</a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#fff1f1] to-[#ffecec]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M12 3v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 13c1 4 4 7 5 8 1-1 4-4 5-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Modernisierung</h3>
+              <p class="mt-1 text-sm text-slate-600">Ersatzteile, Systemoptimierung und Umstellung auf energieeffiziente Technik.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Fördermittelberatung</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Jetzt planen →</a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#fff7f7] to-[#fff1f1]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Wärmepumpen</h3>
+              <p class="mt-1 text-sm text-slate-600">Luft/Wasser und Erdwärme – effizient und zukunftssicher.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Konzept & Planung</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Beratung →</a>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#fff1f1] to-[#ffecec]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M20 21V7a2 2 0 00-2-2H6a2 2 0 00-2 2v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Brennwerttechnik</h3>
+              <p class="mt-1 text-sm text-slate-600">Modernste Brennwertkessel für höchste Effizienz.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Einbau & Service</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Kontakt →</a>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#fff7f7] to-[#fff1f1]">
+              <svg class="w-6 h-6 text-[#c1121f]" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900">Heizungsoptimierung</h3>
+              <p class="mt-1 text-sm text-slate-600">Energetische Analysen, hydraulischer Abgleich, Smarte Steuerungen.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-sm text-slate-500">Energie sparen</div>
+            <a href="#contact" class="text-sm font-semibold text-[#c1121f] hover:underline">Analyse →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-2">
+          <h3 class="text-2xl font-extrabold text-slate-900">Warum Scherer?</h3>
+          <p class="mt-3 text-slate-600 max-w-2xl">Als lokaler Heizungsbetrieb in Worms verbinden wir Handwerkstradition mit modernen Technologien. Unsere Kunden schätzen die transparente Beratung, termintreue Ausführung und nachhaltige Lösungen.</p>
+
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 bg-white rounded-lg shadow-sm">
+              <div class="text-sm text-slate-500">Erfahrung</div>
+              <div class="mt-2 font-semibold text-slate-900">30+ Jahre</div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow-sm">
+              <div class="text-sm text-slate-500">Zertifiziert</div>
+              <div class="mt-2 font-semibold text-slate-900">Fachbetrieb SHK</div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow-sm">
+              <div class="text-sm text-slate-500">Schnell</div>
+              <div class="mt-2 font-semibold text-slate-900">24/7 Notdienst</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-1">
+          <div class="rounded-2xl glass-card p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm text-slate-500">Standort</div>
+                <div class="mt-1 font-semibold text-slate-900">Worms, Rheinland-Pfalz</div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-slate-500">Telefon</div>
+                <div class="mt-1 font-semibold text-slate-900">+49 6241 123456</div>
+              </div>
+            </div>
+
+            <div class="mt-4 border-t border-slate-100 pt-4">
+              <div class="text-sm text-slate-500">Öffnungszeiten</div>
+              <div class="mt-1 text-sm text-slate-700">Mo–Fr: 08:00–17:00 • Sa: Auf Anfrage</div>
+              <a href="#contact" class="mt-4 inline-block text-sm font-semibold text-[#c1121f] hover:underline">Termin vereinbaren →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-slate-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-extrabold text-slate-900">Kontakt & Anfrage</h3>
+          <p class="mt-2 text-slate-600">Schreiben Sie uns eine Nachricht oder rufen Sie direkt an. Wir melden uns zeitnah mit einem unverbindlichen Angebot.</p>
+
+          <form id="contactForm" class="mt-6 space-y-4 bg-white p-6 rounded-2xl shadow-sm" action="#" method="post">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-sm text-slate-700">Ihr Name</span>
+                <input required name="name" class="mt-1 block w-full px-4 py-2 border border-slate-200 rounded-md focus-ring" placeholder="Max Mustermann">
+              </label>
+              <label class="block">
+                <span class="text-sm text-slate-700">Telefon</span>
+                <input name="phone" class="mt-1 block w-full px-4 py-2 border border-slate-200 rounded-md focus-ring" placeholder="+49 162 0000000">
+              </label>
+            </div>
+
+            <label class="block">
+              <span class="text-sm text-slate-700">E-Mail</span>
+              <input required type="email" name="email" class="mt-1 block w-full px-4 py-2 border border-slate-200 rounded-md focus-ring" placeholder="name@beispiel.de">
+            </label>
+
+            <label class="block">
+              <span class="text-sm text-slate-700">Nachricht / Anfrage</span>
+              <textarea name="message" rows="4" class="mt-1 block w-full px-4 py-3 border border-slate-200 rounded-md focus-ring" placeholder="Kurz Ihr Anliegen beschreiben..."></textarea>
+            </label>
+
+            <div class="flex items-center gap-3">
+              <button type="submit" class="inline-flex items-center px-5 py-3 rounded-md text-white bg-gradient-to-r from-[#ff6b6b] to-[#c1121f] shadow-sm hover:scale-[1.01] transition">
+                Anfrage senden
+              </button>
+              <div class="text-sm text-slate-500">Oder rufen Sie uns an: <a href="tel:+496241123456" class="text-slate-800 font-medium">+49 6241 123456</a></div>
+            </div>
+
+            <div id="formMsg" class="hidden mt-2 text-sm text-green-600">Vielen Dank! Wir haben Ihre Anfrage erhalten und melden uns in Kürze.</div>
+          </form>
+        </div>
+
+        <div>
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <!-- Simple illustrative map placeholder -->
+            <div class="bg-gradient-to-br from-[#fff1f1] to-[#fff7f7] p-6">
+              <div class="text-sm text-slate-500">Standort</div>
+              <div class="mt-2 font-semibold text-slate-900">Scherer Heizungsbetrieb</div>
+              <div class="mt-1 text-sm text-slate-700">Musterstraße 12, 67547 Worms</div>
+              <div class="mt-4 h-56 bg-white rounded-lg border border-slate-100 flex items-center justify-center">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" class="opacity-40"><path d="M12 2c3 0 6 2 6 6 0 6-6 12-6 12S6 14 6 8c0-4 3-6 6-6z" stroke="#c1121f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <div class="p-6 bg-white">
+              <ul class="space-y-3 text-sm text-slate-700">
+                <li><strong class="text-slate-900">Adresse:</strong> Musterstraße 12, 67547 Worms</li>
+                <li><strong class="text-slate-900">Telefon:</strong> <a href="tel:+496241123456" class="text-[#c1121f]">+49 6241 123456</a></li>
+                <li><strong class="text-slate-900">E-Mail:</strong> <a href="mailto:info@scherer-heizung.de" class="text-[#c1121f]">info@scherer-heizung.de</a></li>
+                <li><strong class="text-slate-900">Notdienst:</strong> Rund um die Uhr — <span class="text-[#c1121f] font-semibold">+49 6241 123456</span></li>
+              </ul>
+
+              <div class="mt-6">
+                <a href="#contact" class="inline-flex items-center px-4 py-2 rounded-md text-white bg-[#c1121f]">Termin vereinbaren</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notdienst Banner -->
+  <section id="notdienst" class="bg-gradient-to-r from-[#ff6b6b] to-[#c1121f] text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <div class="text-sm font-semibold">Notdienst</div>
+        <div class="mt-1 text-xl font-bold">Soforthilfe bei Heizungsstörungen — 24/7 erreichbar</div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+496241123456" class="inline-flex items-center px-5 py-3 rounded-md bg-white text-[#c1121f] font-semibold shadow">Jetzt anrufen</a>
+        <a href="#contact" class="text-sm underline">Online Anfrage</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <!-- Small logo -->
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ff5a5a"/><stop offset="1" stop-color="#c1121f"/></linearGradient>
+            <rect width="64" height="64" rx="12" fill="url(#g2)"/>
+            <path d="M28 40c0-6 6-10 6-16 0-6-6-10-10-10 0 0-6 8-6 16 0 10 10 16 10 16z" fill="#fff"/>
+          </svg>
+          <div>
+            <div class="font-semibold text-slate-900">Scherer Heizungsbetrieb</div>
+            <div class="text-sm text-slate-500">Musterstraße 12, 67547 Worms</div>
+          </div>
+        </div>
+
+        <div class="text-sm text-slate-500">© <span id="year"></span> Scherer Heizungsbetrieb. Alle Rechte vorbehalten.</div>
+      </div>
+
+      <div class="mt-6 border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-slate-600">Impressum • Datenschutz • AGB</div>
+        <div class="flex items-center gap-3">
+          <a href="#" class="text-slate-500 hover:text-slate-900">Facebook</a>
+          <span class="text-slate-300">•</span>
+          <a href="#" class="text-slate-500 hover:text-slate-900">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileNav.classList.toggle('hidden', !menuOpen);
+      // animate icon
+      const menuIcon = document.getElementById('menuIcon');
+      if (menuOpen) {
+        menuIcon.innerHTML = '<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\" />';
+      } else {
+        menuIcon.innerHTML = '<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 8h16M4 16h16\" />';
+      }
+    });
+
+    // Simple form handling (no backend) — show success message
+    const form = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMsg');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Basic validation already handled by required attributes
+      form.querySelector('button[type="submit"]').disabled = true;
+      formMsg.classList.remove('hidden');
+      // simulate network
+      setTimeout(() => {
+        form.reset();
+        form.querySelector('button[type="submit"]').disabled = false;
+        formMsg.textContent = 'Vielen Dank! Wir haben Ihre Anfrage erhalten und melden uns in Kürze.';
+      }, 900);
+    });
+
+    // IntersectionObserver for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeUp');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('section, article, main > div').forEach(el => {
+      // don't animate header/footer
+      if (!el.classList.contains('no-animate')) observer.observe(el);
+    });
+  </script>
+</body>
+</html>
